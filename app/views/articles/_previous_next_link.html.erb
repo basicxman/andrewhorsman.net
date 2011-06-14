@@ -1,0 +1,15 @@
+<% prev_article = @article.prev %>
+<% next_article = @article.next %>
+<div class="previous-next">
+  <% unless prev_article.nil? %>
+    <span class="prev-article-link">
+      <%= link_to "Prev", article_path(prev_article), :title => "Prev" %>
+    </span>
+  <% end %>
+
+  <% unless next_article.nil? %>
+    <span class="next-article-link">
+      <%= link_to "Next", article_path(next_article), :title => "Next" %>
+    </span>
+  <% end %>
+</div>

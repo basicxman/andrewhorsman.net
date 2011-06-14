@@ -1,0 +1,14 @@
+<span class="article-tags">
+  <ul>
+    <% @tags.each_with_index do |tag, index| %>
+      <li>
+        <% if index >= 2 %>
+          <% if index == 2 %><span class="ellipsis-tags">...</span><% end %>
+          <span class="hidden-tag"><%= display_tag(tag) %></span>
+        <% else %>
+          <%= display_tag(tag) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</span>

@@ -1,0 +1,81 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+@import "styling.css.scss";
+
+/* Reset */
+html, body, div, h1, h2, h3, p {
+  margin:  0px;
+  padding: 0px;
+}
+
+/* Global */
+body {
+  background: $primary_bg_colour $background_grain;
+  color: $primary_fg_colour;
+
+  font-family: 'Droid Sans';
+}
+
+/* Banner/Footer */
+@mixin banner {
+  width:  100%;
+  height: 20px;
+  @include primary-box-shadow;
+}
+
+#top-banner {
+  background: $primary_bg_colour $banner_stripe;
+  top: 0px;
+  left: 0px;
+  @include banner;
+}
+
+/* Header */
+#header {
+  width: $width;
+  margin: 25px auto 15px auto;
+
+  a {
+    text-shadow: 1px 1px 0px #fff;
+    font-size: 24px;
+    @include una;
+  }
+
+  p {
+    font-size:  15px;
+    font-style: italic;
+    margin-top: -6px;
+  }
+}
+
+/* Content/Container */
+#container {
+  position: relative;
+  width: $width;
+  margin: 0 auto;
+
+  #content {
+    float: left;
+    width: $content_width;
+  }
+
+  #sidebar {
+    float: right;
+    width: $width - $content_width;
+  }
+}
+
+/* Errors */
+.errors, .notice {
+  margin: 20px;
+}
+
+div.field_with_errors {
+  display:inline;
+}

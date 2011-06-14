@@ -1,0 +1,57 @@
+$primary_bg_colour: #F1F1F1;
+$primary_fg_colour: #000;
+
+$width: 900px;
+$content_width: 600px;
+
+$banner_stripe:    url('/assets/banner-stripe.png');
+$footer_stripe:    url('/assets/footer-stripe.png');
+$background_grain: url('/assets/bg.png');
+
+$meta_border: 1px solid #DBDBDB;
+$hover_colour: #DD6D68;
+
+$box-definition: 0px 1px 10px #111;
+
+$content_line_height: 23px;
+
+@mixin primary-box-shadow {
+  -webkit-box-shadow: $box-definition;
+  -moz-box-shadow: $box-definition;
+  box-shadow: $box-definition;
+}
+
+@mixin una {
+  text-decoration: none;
+  color: $primary_fg_colour;
+}
+
+@mixin r {
+  margin:  0px;
+  padding: 0px;
+}
+
+@mixin tag {
+  float: left;
+  min-width: 10px;
+  background-color: #2D80B7;
+  font-style: italic;
+  list-style: none;
+  line-height: 35px;
+  margin:  3px;
+  padding: 3px 12px 3px 10px;
+  border-radius: 3px;
+
+  a {
+    @include una;
+  }
+
+  &:hover {
+    background-color: #0D75A6;
+    cursor: pointer;
+
+    a {
+      color: $primary_bg_colour;
+    }
+  }
+}
