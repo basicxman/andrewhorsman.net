@@ -34,8 +34,8 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def publish
-    Article.find_by_params(params).publish
-    redirect_to admin_path
+    notice = publish_notice(Article.find_by_params(params).publish)
+    redirect_to admin_path, :notice => notice
   end
 
   def unpublish
@@ -50,6 +50,14 @@ class Admin::ArticlesController < ApplicationController
       "Committed!"
     else
       "Unable to commit at this time."
+    end
+  end
+
+  def publish_notice(b)
+    if b
+      "Published!"
+    else
+      "Unable to publish at this time."
     end
   end
 end

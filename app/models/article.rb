@@ -48,8 +48,12 @@ class Article < ActiveRecord::Base
   end
 
   def publish
-    self.published_at = Time.zone.now
-    self.save
+    if can_be_published?
+      self.published_at = Time.zone.now
+      self.save
+    else
+      return false
+    end
   end
 
   def unpublish
