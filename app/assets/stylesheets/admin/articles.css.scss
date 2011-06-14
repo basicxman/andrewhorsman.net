@@ -1,0 +1,21 @@
+@import "../styling.css.scss";
+
+#admin-container {
+  #container {
+    #content {
+      width: $width;
+    }
+
+    #sidebar {
+      display: none;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    td, th {
+      border: 1px solid $primary_fg_colour;
+      padding: 5px 10px;
+    }
+  }
+}

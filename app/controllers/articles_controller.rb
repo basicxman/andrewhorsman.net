@@ -12,16 +12,4 @@ class ArticlesController < ApplicationController
   def multiple
     expose(:articles, Article.get_quantity(params[:quantity], params[:offset]))
   end
-
-  def edit
-  end
-
-  def create
-  end
-
-  def update
-  end
-
-  def destroy
-  end
 end

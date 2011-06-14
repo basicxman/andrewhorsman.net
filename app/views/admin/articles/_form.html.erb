@@ -1,0 +1,14 @@
+<%= form_for [:admin, @article] do |f| %>
+  <%= f.label :title %><br />
+  <%= f.text_field :title %><%= error_for(:title, @article) %><br />
+  
+  <%= f.label :author %><br />
+  <%= f.text_field :author %><%= error_for(:author, @article) %><br />
+
+  <%= f.label :content %><br />
+  <%= error_for(:content, @article, "<br />") %>
+  <%= f.text_area :content %><br />
+
+  <br />
+  <%= f.submit %>
+<% end %>

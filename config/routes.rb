@@ -1,11 +1,27 @@
 Site::Application.routes.draw do
 
+  # Administration
+  namespace :admin do
+    resources :articles, :except => [:index, :show] do
+      member do
+        get "commit"
+        get "publish"
+        get "unpublish"
+      end
+    end
+
+    get "/" => "admin#index"
+  end
+
+  # Articles
   match "articles/multiple/:quantity" => "articles#multiple", :as => :show_multiple_aritcles
   match "articles/multiple/:quantity/from/:offset" => "articles#multiple", :as => :show_multiple_articles_with_offset
-  resources :articles
+  resources :articles, :only => [:index, :show]
 
+  # Tags
   resources :tags, :only => [:index, :show]
 
+  # Root
   root :to => "articles#index"
 
   # The priority is based upon order of creation:

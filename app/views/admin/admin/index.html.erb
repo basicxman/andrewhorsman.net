@@ -1,0 +1,4 @@
+<%= add_header("Administration Console") %>
+<%= render "admin/articles/view_meta", :locals => { :articles => @articles } %>
+<br />
+<%= link_to "New Article", new_admin_article_path, :title => "New Article" %>

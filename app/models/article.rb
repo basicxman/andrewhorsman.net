@@ -25,6 +25,38 @@ class Article < ActiveRecord::Base
     Article.frontpage.where("id < ?", self.id).count > 0
   end
 
+  def can_make_milestone_commit?
+    return true if self.last_commit_date.nil?
+
+    delta = Site::Application.config.required_commit_time_delta
+    a = self.last_commit_date + delta.hour
+    Time.zone.now > a
+  end
+
+  def can_be_published?
+    self.stage >= Site::Application.config.required_milestone_commits 
+  end
+
+  def commit
+    if can_make_milestone_commit?
+      self.stage += 1
+      self.last_commit_date = Time.zone.now
+      self.save
+    else
+      return false
+    end
+  end
+
+  def publish
+    self.published_at = Time.zone.now
+    self.save
+  end
+
+  def unpublish
+    self.published_at = nil
+    self.save
+  end
+
   def self.get_quantity(quantity = 1, offset = 0)
     frontpage.offset(offset).limit(quantity)
   end
@@ -39,6 +71,10 @@ class Article < ActiveRecord::Base
 
   def self.latest_first
     order("created_at DESC")
+  end
+
+  def self.updated_desc
+    order("updated_at DESC")
   end
 
   def self.find_by_params(params)

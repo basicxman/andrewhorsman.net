@@ -14,6 +14,9 @@ module Site
 
     config.short_content_length = 200
 
+    config.required_commit_time_delta = 6
+    config.required_milestone_commits = 3
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
