@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <title>Site</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+
+  </head>
+
+  <body>
+
+    <div id="top-banner"></div>
+
+    <div id="header">
+      <h1><a href="/" title="<%= get_config(:main_title) %>"><%= get_config(:main_title) %></a></h1>
+      <p><%= get_config(:main_tagline) %></p>
+    </div>
+
+    <div id="<%= controller_name %>-conatiner">
+      <div id="container">
+
+        <div id="content">
+          <% if flash[:notice] %>
+            <div id="notice"><%= flash[:notice] %></div>
+          <% end %>
+
+          <%= yield %>
+        </div>
+
+        <div id="sidebar">
+          <h3>Sidebar</h3>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+
+</html>

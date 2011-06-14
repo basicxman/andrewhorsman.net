@@ -1,0 +1,22 @@
+<%
+  if !@article.published_at.nil? && @article.published_at > @article.updated_at 
+    display_updated = true
+    justification = "&nbsp;".html_safe * 3
+  else
+    display_updated = false
+    justification = "&nbsp;".html_safe
+  end
+%>
+<div class="article-single">
+  <div>
+    <div class="article-title"><h2><%= article_link(@article) %></h2><%= render "previous_next_link", :locals => { article: @article } %>
+    <div class="article-author">by <%= @article.author %></div>
+    <div class="article-date">Posted:<%= justification %><span class="date"><%= @article.created_at %></span></div>
+    <% if display_updated %>
+      <div class="article-updated-date">Updated:<%= justification %><span class="date"><%= @article.updated_at %></span></div>
+    <% end %>
+  </div>
+
+  <div style="clear: both;"></div>
+  <div class="article-content"><%= @article.content.html_safe %></div>
+</div>

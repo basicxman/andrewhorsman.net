@@ -1,0 +1,12 @@
+@import "styling.css.scss";
+
+.tags-list {
+  ul {
+    margin: 10px 0px 0px -3px;
+    padding: 0px;
+    li {
+      @include tag;
+      line-height: 20px;
+    }
+  }
+}

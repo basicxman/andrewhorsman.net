@@ -1,0 +1,124 @@
+@import "styling.css.scss";
+
+/* Single article styling. */
+.article-single {
+  margin-bottom:40px;
+  
+  .article-title {
+    a {
+      @include una;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      display: inline;
+    }
+
+    .previous-next {
+      width: 90px;
+      float: right;
+    }
+  }
+
+  .article-date, .article-updated-date {
+    font-size: 14px;
+    font-family: 'Droid Sans Mono';
+    font-style: italic;
+  }
+
+  .article-tags {
+    ul {
+      margin:  10px -3px;
+      padding: 0px;
+
+      li {
+        @include tag;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .article-content {
+    border: {
+      top:    $meta_border;
+      bottom: $meta_border;
+    }
+    margin-top:  20px;
+    padding: 20px 0px;
+    line-height: $content_line_height;
+  }
+  
+}
+
+/* Multiple articles styling. */
+.articles-container {
+  
+  .article-title {
+    margin-bottom: 4px;
+
+    h2 {
+      font-size: 16px;
+
+      a {
+        @include una;
+
+        &:hover {
+          color: $hover_colour;
+        }
+      }
+    }
+  }
+
+  .article-meta {
+    border: {
+      top:    $meta_border;
+      bottom: $meta_border;
+    }
+    padding: 5px 0px;
+
+    .article-author {
+      text-decoration: underline;
+    }
+
+    .article-date {
+      font-style: italic;
+    }
+  }
+
+  .article-tags {
+    margin: 5px 0px 12px;
+
+    ul {
+      float: right;
+      margin:  0px;
+      padding: 0px;
+
+      li {
+        font-style: italic;
+        list-style: none;
+        float: left;
+        margin: 0px 5px 0px 0px;
+        padding: 0px;
+
+        a {
+          @include una;
+
+          &:hover {
+            color: $hover_colour;
+            cursor: pointer;
+          }
+        }
+
+        .hidden-tag {
+          display:none;
+        }
+      }
+    }
+  }
+
+  .article-content {
+    margin: 5px 0px;
+  }
+
+}
