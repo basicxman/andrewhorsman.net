@@ -38,14 +38,19 @@ html, body {
 }
 
 #footer {
-  height: $footer_height;
+  height: $footer_height - 5;
   width: $width;
   margin: 0 auto;
   color: darken($primary_bg_colour, 80%);
   text-align: center;
+  border-top: $meta_border;
 
   a {
     color: darken($primary_bg_colour, 70%);
+  }
+
+  p {
+    margin-top: 10px;
   }
 }
 

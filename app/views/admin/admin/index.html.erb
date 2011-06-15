@@ -1,4 +1,4 @@
-<div id="centered-content">
+<div class="centered-content">
   <%= add_header("Administration Console") %>
   <br />
   <%= link_to "New Article", new_admin_article_path, :title => "New Article" %>
@@ -7,4 +7,8 @@
 </div>
 <div id="full-content">
   <%= render "admin/articles/view_meta", :locals => { :articles => @articles } %>
+</div>
+<br />
+<div class="centered-content">
+  <%= render "articles/top" %>
 </div>

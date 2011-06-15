@@ -2,7 +2,9 @@
 
 /* Single article styling. */
 .article-single {
-  margin-bottom:40px;
+  .top-link {
+    margin-bottom: 30px;
+  }
   
   .article-title {
     a {
