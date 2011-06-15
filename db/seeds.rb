@@ -1,17 +1,42 @@
-a = Article.create({
-  :published_at => Time.zone.now,
-  :title => "Testing",
-  :author => "John Smith",
-  :content => "Testing a new page.",
-})
-a.tags << Tag.find_or_create("foo")
-a.tags << Tag.find_or_create("bar")
+def article
+  $a = Article.create({
+    :published_at => Time.zone.now,
+    :last_commit_date => Time.zone.now,
+    :stage => 3,
+    :author => "John Smith"
+  }.merge(yield))
+end
 
-b = Article.create({
-  :published_at => Time.zone.now,
-  :title => "Long form article",
-  :author => "John Smith",
-  :content => <<-eof
+def add_tags(*list)
+  list.each do |t|
+    $a.tags << Tag.find_or_create(t)
+  end
+end
+#--------------------------------------
+
+
+article do
+  {
+    :title => "Testing",
+    :content => "Testing a new page."
+  }
+end
+add_tags "foo", "bar"
+
+30.times do |n|
+  article do
+    {
+      :title => "Article #{n} in series",
+      :content => "This is part of a series (except not really of course) zomg!"
+    }
+  end
+  add_tags "foo", "series"
+end
+
+article do
+  {
+    :title => "Long form article",
+    :content => <<-eof
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue erat, viverra ac aliquam non, suscipit ac urna. Pellentesque varius dictum quam vitae dignissim. Nam nec sapien at lacus vestibulum facilisis nec et metus. Fusce eu lacus et nulla congue blandit. Nulla aliquam placerat placerat. Quisque tempor, augue vitae scelerisque cursus, metus nulla dignissim est, non tempor libero nunc ac tellus. Aenean suscipit sodales nisi eget hendrerit. Suspendisse pellentesque sodales ligula a fermentum. Quisque posuere mauris non ante commodo pulvinar. Duis in magna a dui auctor volutpat a quis ligula. In sagittis rhoncus volutpat. Morbi tempus mauris pellentesque purus faucibus rutrum. Proin placerat nunc a nulla tristique ultricies. Nam arcu quam, bibendum a tempus at, tempus vel eros. Fusce quis ipsum felis, et luctus libero. Vivamus rhoncus vulputate pretium. Curabitur enim tortor, ultrices eu varius ut, luctus eu diam. Nam ac nisl nec eros tincidunt vehicula. Fusce ultrices porttitor justo. Donec id diam eget augue mattis feugiat.
 
 Cras at nisi id velit mattis sodales. Morbi ut nunc sed dolor commodo viverra. Morbi suscipit lacinia lacus semper tempor. Ut hendrerit fringilla tincidunt. Nullam ac quam id orci ultrices porta. Phasellus fringilla ante erat. Ut a sapien erat. Etiam et justo in est posuere elementum. Donec placerat nunc vitae lacus laoreet fermentum. Etiam in risus mi, sit amet lacinia nisi. Curabitur mi risus, tincidunt quis rutrum quis, fermentum at justo. Nulla tincidunt, eros congue laoreet ullamcorper, ipsum elit pellentesque tortor, a faucibus leo enim ac diam. Curabitur suscipit ultrices sapien sed semper. Vivamus ac iaculis quam. Phasellus vel neque ut leo varius commodo.
@@ -32,6 +57,6 @@ Cras dapibus risus at tortor euismod ullamcorper. Praesent commodo ullamcorper f
 
 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam et aliquam purus. Cras pretium purus ac magna interdum mattis in nec ipsum. Ut auctor sollicitudin enim porta consequat. Quisque vestibulum bibendum felis in semper. Aenean vitae quam quis est vulputate facilisis ut id urna. Pellentesque ut urna in libero condimentum rhoncus ut vel enim. Ut vitae tempor tellus. Phasellus molestie tortor eu lorem tincidunt tempor. Pellentesque dapibus, sem et sagittis ultrices, orci leo ultrices eros, ac hendrerit nulla mi eu velit. Donec ultricies dignissim nunc, et faucibus tortor fringilla eu. Fusce lacinia facilisis sapien, nec tempus augue tincidunt id. Mauris euismod neque vitae lectus molestie dapibus. Donec et elit eget quam pellentesque ullamcorper. Curabitur tempus risus a massa aliquam gravida. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin quis adipiscing massa. Mauris eu eros orci, vel elementum libero. Proin varius suscipit eleifend.
 eof
-})
-b.tags << Tag.find_or_create("foo")
-b.tags << Tag.find_or_create("some-very-very-very-very-long-tag")
+  }
+end
+add_tags "foo", "some-very-very-very-very-long-tag"
