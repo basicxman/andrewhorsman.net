@@ -5,12 +5,16 @@ module ApplicationHelper
   end
 
   def construct_title(title = nil)
-    return get_config(:main_title) if title.blank?
-    "#{title} | #{get_config(:main_title)}"
+    a = if title.blank?
+      get_config(:main_title)
+    else
+      "#{title} | #{get_config(:main_title)}"
+    end
+    content_for :title, a
   end
 
   def add_header(title)
-    content_for :title, title
+    construct_title(title)
     "<h3>#{title}</h3>".html_safe
   end
 

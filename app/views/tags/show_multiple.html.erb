@@ -1,3 +1,4 @@
+<%= construct_title("Viewing #{@noun} #{@tagline}") %>
 <h3>Viewing <%= @noun %> <i><%= @tagline %></i></h3>
 <br />
 <%= render "articles/multi", :locals => { :articles => @articles } %>

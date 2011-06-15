@@ -4,7 +4,7 @@
 
   <head>
 
-    <title>Site</title>
+    <title><%= content_for :title %></title>
 
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag    "application" %>
@@ -15,29 +15,40 @@
 
   <body>
 
-    <div id="top-banner"></div>
+    <div id="page">
+      <div id="top-banner"></div>
 
-    <div id="header">
-      <h1><a href="/" title="<%= get_config(:main_title) %>"><%= get_config(:main_title) %></a></h1>
-      <p><%= get_config(:main_tagline) %></p>
+      <div id="header">
+        <h1><a href="/" title="<%= get_config(:main_title) %>"><%= get_config(:main_title) %></a></h1>
+        <p><%= get_config(:main_tagline) %></p>
+      </div>
+
+      <div id="<%= controller_name %>-container">
+        <div id="container">
+
+          <div id="content">
+            <% if flash[:notice] %>
+              <div id="notice"><%= flash[:notice] %></div>
+            <% end %>
+
+            <%= yield %>
+          </div>
+
+          <div id="sidebar">
+            <h3>Sidebar</h3>
+          </div>
+
+          <div id="clearing"></div>
+
+        </div>
+      </div>
     </div>
 
-    <div id="<%= controller_name %>-container">
-      <div id="container">
-
-        <div id="content">
-          <% if flash[:notice] %>
-            <div id="notice"><%= flash[:notice] %></div>
-          <% end %>
-
-          <%= yield %>
-        </div>
-
-        <div id="sidebar">
-          <h3>Sidebar</h3>
-        </div>
-
-      </div>
+    <div id="footer">
+      <p>
+        &copy; 2011 Andrew Horsman<br />
+        Powered by Ruby on Rails, entirely <a href="http://github.com/basicxman/andrewhorsman.net" title="andrewhorsman.net on GitHub">open source</a>.
+      </p>
     </div>
 
   </body>

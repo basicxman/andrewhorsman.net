@@ -9,7 +9,7 @@
 @import "styling.css.scss";
 
 /* Reset */
-html, body, div, h1, h2, h3, p {
+html, body, div, h1, h2, h3, p, span {
   margin:  0px;
   padding: 0px;
 }
@@ -20,6 +20,33 @@ body {
   color: $primary_fg_colour;
 
   font-family: 'Droid Sans';
+}
+
+html, body {
+  height: 100%;
+}
+
+#page {
+  min-height: 100%;
+  height: auto !important;
+  margin-bottom: -$footer_height;
+}
+
+#clearing {
+  clear: both;
+  height: $footer_height;
+}
+
+#footer {
+  height: $footer_height;
+  width: $width;
+  margin: 0 auto;
+  color: darken($primary_bg_colour, 80%);
+  text-align: center;
+
+  a {
+    color: darken($primary_bg_colour, 70%);
+  }
 }
 
 /* Banner/Footer */
