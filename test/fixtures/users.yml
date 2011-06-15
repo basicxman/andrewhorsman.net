@@ -1,9 +1,11 @@
 one:
+  id: 1
   email: foo@bar.com
   name: John Smith
   is_admin: false
 
 two:
+  id: 2
   email: self@andrewhorsman.net
   name: Andrew Horsman
   is_admin: true
