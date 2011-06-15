@@ -69,6 +69,10 @@ class Article < ActiveRecord::Base
     self.save
   end
 
+  def self.available_pages
+    (Article.count.to_f / Site::Application.config.articles_in_page).ceil
+  end
+
   def self.get_quantity(quantity = 1, offset = 0)
     frontpage.offset(offset).limit(quantity)
   end

@@ -1,8 +1,10 @@
 class ArticlesController < ApplicationController
+  include ApplicationHelper
   respond_to :html, :json, :xml
 
   def index
-    expose(:articles, Article.frontpage)
+    set(:page, 0)
+    expose(:articles, Article.frontpage.limit(get_config(:articles_in_page)))
   end
 
   def show
@@ -10,6 +12,11 @@ class ArticlesController < ApplicationController
   end
 
   def multiple
+    if params[:page]
+      params[:quantity] = get_config(:articles_in_page)
+      params[:offset]   = get_config(:articles_in_page) * params[:page].to_i
+      set(:page, params[:page])
+    end
     expose(:articles, Article.get_quantity(params[:quantity], params[:offset]))
   end
 end
