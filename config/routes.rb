@@ -15,7 +15,8 @@ Site::Application.routes.draw do
 
   match "login"      => "user#login",      :via => :post, :as => :login
   match "logout"     => "user#logout",     :via => :get,  :as => :logout
-  match "login_form" => "user#login_form", :via => :get,  :as => :login_form
+  match "login_form" => "user#login_form", :via => :get
+  match "login"      => "user#login_form", :via => :get,  :as => :login_form
 
   # Articles
   match "articles/multiple/:quantity" => "articles#multiple", :as => :show_multiple_aritcles

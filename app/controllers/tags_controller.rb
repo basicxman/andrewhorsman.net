@@ -7,7 +7,7 @@ class TagsController < ApplicationController
 
   def show
     set(:tag, Tag.find_by_params(params))
-    expose(:articles, @tag.articles.publishable)
+    expose(:articles, @tag.articles.publishable.latest_first)
   end
 
   def show_multiple
