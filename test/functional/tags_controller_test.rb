@@ -8,14 +8,14 @@ class TagsControllerTest < ActionController::TestCase
 
   test "should get the articles for tag foo" do
     get :show, :id => 1
-    assert_select ".article-title", :count => 2
+    assert_select ".article-title", :count => 3
     assert_select ".article-title h2", :text => "Article with tags"
     assert_select ".article-title h2", :text => "Article with long tags"
   end
 
   test "should get the articles for multiple tags" do
     get :show_multiple, :keywords => "bar,some-very-very-very-very-long-tag"
-    assert_select ".article-title", :count => 2
+    assert_select ".article-title", :count => 3
     assert_select ".article-title h2", :text => "Article with long tags"
     assert_select ".article-title h2", :text => "Article with tags"
   end
