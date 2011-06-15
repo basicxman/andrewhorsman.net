@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
-  has_and_belongs_to_many :articles
+  has_many :taggings
+  has_many :articles, :through => :taggings
 
   validates_uniqueness_of :keyword
   validates_presence_of   :keyword
