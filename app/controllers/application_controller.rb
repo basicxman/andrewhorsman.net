@@ -29,10 +29,26 @@ class ApplicationController < ActionController::Base
   helper_method :user # Available in views too!
 
   def authenticate_admin
-    redirect_to root_path, :notice => "Need to be an admin to see this page!" if user.nil? or !user.is_admin
+    if user.nil? or !user.is_admin
+      set_redirect
+      redirect_to login_form_path, :notice => "Need to be an admin to see this page!"
+    end
   end
 
   def authenticate_user
-    redirect_to login_path, :notice => "Need to be logged in to see this page!" if user.nil?
+    if user.nil?
+      set_redirect
+      redirect_to login_form_path, :notice => "Need to be logged in to see this page!"
+    end
+  end
+
+  def set_redirect
+    session[:redirect_to] = request.fullpath
+  end
+
+  def get_redirect
+    r = session[:redirect_to] || root_path
+    session[:redirect_to] = nil
+    r
   end
 end

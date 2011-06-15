@@ -7,7 +7,7 @@ class UserController < ApplicationController
     user = User.find_by_email(params[:email])
     if user and user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, :notice => "Logged in as #{user.email}.  Hi #{user.name}!"
+      redirect_to get_redirect, :notice => "Logged in as #{user.email}.  Hi #{user.name}!"
     else
       flash[:notice] = "Failed to login."
       render :login_form
