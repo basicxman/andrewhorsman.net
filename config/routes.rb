@@ -13,6 +13,10 @@ Site::Application.routes.draw do
     get "/" => "admin#index"
   end
 
+  match "login"      => "user#login",      :via => :post, :as => :login
+  match "logout"     => "user#logout",     :via => :get,  :as => :logout
+  match "login_form" => "user#login_form", :via => :get,  :as => :login_form
+
   # Articles
   match "articles/multiple/:quantity" => "articles#multiple", :as => :show_multiple_aritcles
   match "articles/multiple/:quantity/from/:offset" => "articles#multiple", :as => :show_multiple_articles_with_offset

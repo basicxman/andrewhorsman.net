@@ -1,6 +1,8 @@
 class Admin::ArticlesController < ApplicationController
   respond_to :html
 
+  before_filter :authenticate_admin
+
   def new
     expose(:article, Article.new)
   end

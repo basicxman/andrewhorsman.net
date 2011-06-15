@@ -21,4 +21,18 @@ class ApplicationController < ActionController::Base
       render(render_action)
     end
   end
+
+  # User authentication
+  def user
+    @user = User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :user # Available in views too!
+
+  def authenticate_admin
+    redirect_to root_path, :notice => "Need to be an admin to see this page!" if user.nil? or !user.is_admin
+  end
+
+  def authenticate_user
+    redirect_to login_path, :notice => "Need to be logged in to see this page!" if user.nil?
+  end
 end
