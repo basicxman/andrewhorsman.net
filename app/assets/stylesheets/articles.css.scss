@@ -16,7 +16,8 @@
     }
 
     .previous-next {
-      width: 90px;
+      min-width: 10px;
+      padding-right: 3px;
       float: right;
     }
   }

@@ -19,6 +19,10 @@ module Site
 
     config.articles_in_page = 10
 
+    # RSS
+    config.category    = "Computers"
+    config.owner_email = "self@andrewhorsman.net"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

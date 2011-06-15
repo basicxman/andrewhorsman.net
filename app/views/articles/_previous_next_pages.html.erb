@@ -1,0 +1,12 @@
+<% unless @page.nil? %>
+  <% page = @page.to_i %>
+  <div class="page_links">
+    <% if page > 0 %>
+      <%= link_to "Previous Page", articles_page_path(page - 1), :title => "Previous Page" %>
+    <% end %>
+
+    <% if page < Article.available_pages - 1 %>
+      <%= link_to "Next Page", articles_page_path(page + 1), :title => "Next Page" %>
+    <% end %>
+  </div>
+<% end %>
