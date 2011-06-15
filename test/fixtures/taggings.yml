@@ -1,9 +1,19 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
 one:
-  article_id: 1
+  article_id: 8
   tag_id: 1
 
 two:
-  article_id: 1
+  article_id: 8
+  tag_id: 2
+
+three:
+  article_id: 8
+  tag_id: 3
+
+four:
+  article_id: 9
   tag_id: 1
+
+five:
+  article_id: 9
+  tag_id: 4

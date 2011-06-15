@@ -1,14 +1,16 @@
 require 'test_helper'
 
 class UserControllerTest < ActionController::TestCase
-  test "should get login" do
-    get :login
-    assert_response :success
+  # Routes
+  test "should route to end-user login form" do
+    assert_routing "/login_form", { :controller => "user", :action => "login_form" }
   end
 
-  test "should get logout" do
-    get :logout
-    assert_response :success
+  test "should route to login process" do
+    assert_routing({ :path => "/login", :method => :post }, { :controller => "user", :action => "login" })
   end
 
+  test "should route to logout process" do
+    assert_routing "/logout", { :controller => "user", :action => "logout" }
+  end
 end

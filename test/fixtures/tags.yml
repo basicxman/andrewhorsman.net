@@ -1,0 +1,15 @@
+one:
+  id: 1
+  keyword: foo
+
+two:
+  id: 2
+  keyword: bar
+
+three:
+  id: 3
+  keyword: test
+
+four:
+  id: 4
+  keyword: some-very-very-very-very-long-tag

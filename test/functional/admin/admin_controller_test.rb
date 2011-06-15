@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class Admin::AdminControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+  # Routes
+  test "should route to administration console" do
+    assert_routing "/admin", { :controller => "admin/admin", :action => "index" }
   end
-
 end
