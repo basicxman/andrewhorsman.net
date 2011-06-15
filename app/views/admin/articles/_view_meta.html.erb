@@ -3,6 +3,7 @@
     <tr>
       <th>ID</th>
       <th>Title</th>
+      <th>Tags</th>
       <th>Author</th>
       <th>Stage</th>
       <th>Last Commit Date</th>
@@ -13,10 +14,14 @@
   </thead>
   <tbody>
     <% @articles.each do |article| %>
-      <% @article_cur = article %>
+      <%
+        @article_cur    = article
+        @tags           = article.tags
+      %>
       <tr>
         <td><%= article.id %></td>
         <td><%= article.title %></td>
+        <td><%= render "tags/single_line_tags", :locals => { :tags => @tags } %></td>
         <td><%= article.author %></td>
         <td><%= article.stage %></td>
         <td><%= article.last_commit_date || "No commit yet." %></td>

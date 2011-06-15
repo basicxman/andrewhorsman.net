@@ -20,4 +20,14 @@ module ApplicationHelper
     end
   end
 
+  def snip_content(content)
+    return content if content.length <= get_config(:short_content_length)
+    content[0..get_config(:short_content_length)] + "..."
+  end
+
+  def snip_column_content(content)
+    return content if content.length <= get_config(:short_column_content_length)
+    content[0..get_config(:short_column_content_length)] + "..."
+  end
+
 end

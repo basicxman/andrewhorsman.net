@@ -1,9 +1,9 @@
-<div class="articles-container">
+<div class="articles-multi-container">
   <% @articles.each do |article| %>
+    <% @tags = article.tags %>
     <div class="article-title"><h2><%= article_link(article) %></h2></div>
     <div class="article-meta">by <span class="article-author"><%= article.author %></span> on <span class="article-date"><%= article.published_at %></span>
     <% if article.tags.length > 0 %>
-      <% @tags = article.tags %>
       <%= render "tags/single_line_tags", :locals => { :tags => @tags } %>
     <% end %></div>
     <div class="article-content"><%= snip_content(article.content.html_safe) %></div>

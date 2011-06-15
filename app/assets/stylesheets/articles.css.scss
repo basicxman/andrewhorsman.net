@@ -28,6 +28,7 @@
   }
 
   .article-tags {
+    float: left;
     ul {
       margin:  10px -3px;
       padding: 0px;
@@ -44,15 +45,45 @@
       top:    $meta_border;
       bottom: $meta_border;
     }
-    margin-top:  20px;
     padding: 20px 0px;
     line-height: $content_line_height;
   }
   
 }
 
+.article-tags {
+  margin: 5px 0px 12px;
+
+  ul {
+    float: right;
+    margin:  0px;
+    padding: 0px;
+
+    li {
+      font-style: italic;
+      list-style: none;
+      float: left;
+      margin: 0px 5px 0px 0px;
+      padding: 0px;
+
+      a {
+        @include una;
+
+        &:hover {
+          color: $hover_colour;
+          cursor: pointer;
+        }
+      }
+
+      .hidden-tag {
+        display:none;
+      }
+    }
+  }
+}
+
 /* Multiple articles styling. */
-.articles-container {
+.articles-multi-container {
   
   .article-title {
     margin-bottom: 4px;
@@ -84,35 +115,15 @@
     .article-date {
       font-style: italic;
     }
-  }
 
-  .article-tags {
-    margin: 5px 0px 12px;
-
-    ul {
-      float: right;
-      margin:  0px;
-      padding: 0px;
-
-      li {
-        font-style: italic;
-        list-style: none;
-        float: left;
-        margin: 0px 5px 0px 0px;
-        padding: 0px;
-
-        a {
-          @include una;
-
-          &:hover {
-            color: $hover_colour;
-            cursor: pointer;
-          }
-        }
-
-        .hidden-tag {
-          display:none;
-        }
+    div.article-tags {
+      min-height: 5px;
+      ul {
+        float: none;
+        .tag0 a { color: $primary_fg_colour; }
+        .tag1 a { color: lighten($primary_fg_colour, 20%); }
+        .tag2 a { color: lighten($primary_fg_colour, 40%); }
+        .tag3 a { color: lighten($primary_fg_colour, 60%); }
       }
     }
   }

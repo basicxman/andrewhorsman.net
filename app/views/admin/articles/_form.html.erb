@@ -5,6 +5,9 @@
   <%= f.label :author %><br />
   <%= f.text_field :author %><%= error_for(:author, @article) %><br />
 
+  <%= f.label :tag_list, "Tags" %><br />
+  <%= f.text_field :tag_list %><br />
+
   <%= f.label :content %><br />
   <%= error_for(:content, @article, "<br />") %>
   <%= f.text_area :content %><br />

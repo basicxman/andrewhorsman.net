@@ -46,18 +46,10 @@ class Admin::ArticlesController < ApplicationController
   private
   
   def commit_notice(b)
-    if b
-      "Committed!"
-    else
-      "Unable to commit at this time."
-    end
+    b ? "Committed!" : "Unable to commit at this time."
   end
 
   def publish_notice(b)
-    if b
-      "Published!"
-    else
-      "Unable to publish at this time."
-    end
+    b ? "Published!" : "Unable to publish at this time."
   end
 end

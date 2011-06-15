@@ -19,6 +19,7 @@ Site::Application.routes.draw do
   resources :articles, :only => [:index, :show]
 
   # Tags
+  match "tags/multiple/:keywords" => "tags#show_multiple", :as => :show_multiple_tags
   resources :tags, :only => [:index, :show]
 
   # Root

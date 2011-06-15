@@ -7,7 +7,7 @@ class TagsController < ApplicationController
 
   def show
     set(:tag, Tag.find_by_params(params))
-    expose(:articles, @tag.articles)
+    expose(:articles, @tag.articles.publishable)
   end
 
   def show_multiple
@@ -31,5 +31,6 @@ class TagsController < ApplicationController
         ", #{keyword}"
       end
     end
+    tagline
   end
 end

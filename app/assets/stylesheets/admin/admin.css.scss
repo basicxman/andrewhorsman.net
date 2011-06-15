@@ -1,0 +1,39 @@
+@import "../styling.css.scss";
+
+#admin-container {
+  width: 100%;
+  #container {
+    width: 100%;
+    #content {
+      width: 100%;
+
+      #centered-content {
+        width: $width;
+        margin: 0 auto;
+      }
+
+      #full-content {
+        background-color: #eee;
+        padding: 1px 20px;
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          td, th {
+            border: 1px solid $primary_fg_colour;
+            padding: 5px 10px;
+          }
+
+          .article-tags {
+            float: left;
+            margin: 0px;
+          }
+        }
+      }
+    }
+
+    #sidebar {
+      display: none;
+    }
+  }
+}

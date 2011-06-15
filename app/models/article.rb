@@ -7,6 +7,14 @@ class Article < ActiveRecord::Base
     "#{self.id}-#{self.title.parameterize}"
   end
 
+  def tag_list=(list)
+    self.tags = Tag.find_by_keywords(list.split(' '))
+  end
+
+  def tag_list
+    self.tags.map(&:keyword).join(' ')
+  end
+
   def next
     nil unless next_available?
     Article.publishable.order("id ASC").where("id > ?", self.id).limit(1).first
@@ -86,6 +94,6 @@ class Article < ActiveRecord::Base
   end
 
   def self.find_by_tags(tags)
-    find(:all, :include => :tags, :conditions => ["tags.keyword IN (?)", tags])
+    publishable.find(:all, :include => :tags, :conditions => ["tags.keyword IN (?)", tags])
   end
 end

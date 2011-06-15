@@ -1,14 +1,18 @@
-<span class="article-tags">
+<%
+  length = @tags.inject(0) { |n, t| n += t.keyword.length }
+  type = length > 30 ? :div : :span
+%>
+<%= content_tag type, :class => "article-tags" do -%>
   <ul>
     <% @tags.each_with_index do |tag, index| %>
       <li>
-        <% if index >= 2 %>
-          <% if index == 2 %><span class="ellipsis-tags">...</span><% end %>
+        <% if index >= 4 %>
+          <% if index == 4 %><span class="ellipsis-tags">...</span><% end %>
           <span class="hidden-tag"><%= display_tag(tag) %></span>
         <% else %>
-          <%= display_tag(tag) %>
+          <span class="tag<%= index %>"><%= display_tag(tag) %></span>
         <% end %>
       </li>
     <% end %>
   </ul>
-</span>
+<% end %>

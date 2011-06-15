@@ -21,6 +21,10 @@ class Tag < ActiveRecord::Base
     find(params[:id].to_i)
   end
 
+  def self.find_by_keywords(keywords)
+    keywords.map { |k| Tag.find_or_create(k) }
+  end
+
   def self.find_or_create(keyword)
     t = Tag.find_by_keyword(keyword)
     t = Tag.create(:keyword => keyword) if t.nil?
