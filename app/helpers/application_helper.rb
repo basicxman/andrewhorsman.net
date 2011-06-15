@@ -24,14 +24,14 @@ module ApplicationHelper
     end
   end
 
+  # Smarter content snipping.
   def snip_content(content)
-    return content if content.length <= get_config(:short_content_length)
-    content[0..get_config(:short_content_length)] + "..."
-  end
+    l = get_config(:short_content_length)
+    return content if content.length <= l
 
-  def snip_column_content(content)
-    return content if content.length <= get_config(:short_column_content_length)
-    content[0..get_config(:short_column_content_length)] + "..."
+    i = l + content[l..-1].index(/[!\?\.;,\s%]|$/)
+    i = l if i.nil? or i - 15 > l
+    content[0...i] + "..."
   end
 
 end
