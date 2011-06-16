@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  include ArticlesHelper
   has_many :taggings
   has_many :tags, :through => :taggings
 
@@ -8,6 +9,8 @@ class Article < ActiveRecord::Base
   scope :latest_first, lambda { order("created_at DESC") }
   scope :updated_desc, lambda { order("updated_at DESC") }
   scope :frontpage,    lambda { publishable.latest_first }
+
+  attr_accessor :file
 
   def to_param
     "#{self.id}-#{self.title.parameterize}"
@@ -71,6 +74,11 @@ class Article < ActiveRecord::Base
     self.update_attributes :published_at => nil
   end
 
+  def self.new_article_from_file(path)
+    content = File.read(path)
+    Article.new(process_article_file_contents(content))
+  end
+
   def self.available_pages
     (Article.count.to_f / Site::Application.config.articles_in_page).ceil
   end
@@ -86,4 +94,30 @@ class Article < ActiveRecord::Base
   def self.find_by_tags(tags)
     publishable.find(:all, :include => :tags, :conditions => ["tags.keyword IN (?)", tags])
   end
+
+  private
+
+  def self.header_var(string, var)
+    m = string.match(/^@#{var}:\s*(.*)$/)
+    m.nil?? "" : m[1]
+  end
+
+  def self.process_article_file_contents(data)
+    contents = data.split("\n")
+    header   = ""
+    index    = 0
+    contents.each do |line|
+      break if line.blank?
+      header += line + "\n"
+      index += 1
+    end
+
+    title   = header_var(header, "title")
+    author  = header_var(header, "author")
+    tags    = header_var(header, "tags")
+    content = contents[index + 1..-1].join("\n")
+
+    { :title => title, :author => author, :tag_list => tags, :content => content }
+  end
+
 end

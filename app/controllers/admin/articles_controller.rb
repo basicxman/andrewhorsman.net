@@ -1,5 +1,5 @@
 class Admin::ArticlesController < ApplicationController
-  respond_to :html
+  respond_to :html, :txt
 
   before_filter :authenticate_admin
 
@@ -11,8 +11,16 @@ class Admin::ArticlesController < ApplicationController
     expose(:article, Article.find_by_params(params))
   end
 
+  def show
+    expose(:article, Article.find_by_params(params))
+  end
+
   def create
-    @article = Article.new(params[:article])
+    if params[:article][:file]
+      @article = Article.new_article_from_file(params[:article][:file].tempfile)
+    else
+      @article = Article.new(params[:article])
+    end
     redirect_or_render(admin_path, :new) do
       @article.save
     end

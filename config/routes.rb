@@ -2,7 +2,7 @@ Site::Application.routes.draw do
 
   # Administration
   namespace :admin do
-    resources :articles, :except => [:index, :show] do
+    resources :articles, :except => [:index] do
       member do
         get "commit"
         get "publish"

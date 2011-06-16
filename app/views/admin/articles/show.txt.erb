@@ -1,0 +1,5 @@
+@title: <%= @article.title %>
+@author: <%= @article.author %>
+@tags: <%= @article.tags.map { |t| t.keyword }.join(' ') %>
+
+<%= @article.content %>

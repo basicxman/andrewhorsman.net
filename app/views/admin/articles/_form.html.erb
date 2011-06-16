@@ -13,5 +13,10 @@
   <%= f.text_area :content %><br />
 
   <br />
+  <%= f.label :file, "Alternatively you may upload a file." %><br />
+  <%= f.file_field :file %>
+  <br />
+
+  <br />
   <%= f.submit %>
 <% end %>
