@@ -2,7 +2,12 @@ class Article < ActiveRecord::Base
   has_many :taggings
   has_many :tags, :through => :taggings
 
-  validates_presence_of [:title, :author, :content]
+  validates_presence_of :title, :author, :content
+
+  scope :publishable,  lambda { where("published_at IS NOT NULL") }
+  scope :latest_first, lambda { order("created_at DESC") }
+  scope :updated_desc, lambda { order("updated_at DESC") }
+  scope :frontpage,    lambda { publishable.latest_first }
 
   def to_param
     "#{self.id}-#{self.title.parameterize}"
@@ -47,27 +52,19 @@ class Article < ActiveRecord::Base
   end
 
   def commit
-    if can_make_milestone_commit?
-      self.stage += 1
-      self.last_commit_date = Time.zone.now
-      self.save
-    else
-      return false
-    end
+    return false unless can_make_milestone_commit?
+    self.stage += 1
+    self.last_commit_date = Time.zone.now
+    self.save
   end
 
   def publish
-    if can_be_published?
-      self.published_at = Time.zone.now
-      self.save
-    else
-      return false
-    end
+    return false unless can_be_published?
+    self.update_attributes :published_at => Time.zone.now
   end
 
   def unpublish
-    self.published_at = nil
-    self.save
+    self.update_attributes :published_at => nil
   end
 
   def self.available_pages
@@ -76,22 +73,6 @@ class Article < ActiveRecord::Base
 
   def self.get_quantity(quantity = 1, offset = 0)
     frontpage.offset(offset).limit(quantity)
-  end
-
-  def self.publishable
-    where("published_at IS NOT NULL")
-  end
-
-  def self.frontpage
-    publishable.latest_first
-  end
-
-  def self.latest_first
-    order("created_at DESC")
-  end
-
-  def self.updated_desc
-    order("updated_at DESC")
   end
 
   def self.find_by_params(params)

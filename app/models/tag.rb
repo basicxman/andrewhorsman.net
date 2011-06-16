@@ -6,16 +6,15 @@ class Tag < ActiveRecord::Base
   validates_presence_of   :keyword
   validates_format_of     :keyword, :with => /^[0-9a-zA-Z\-\?!]+$/
 
+  scope :latest_first, lambda { order("created_at DESC") }
+  scope :frontpage,    lambda { latest_first.all }
+
   def to_param
     "#{self.id}-#{self.keyword}"
   end
 
-  def self.latest_first
-    order("created_at DESC")
-  end
-
-  def self.frontpage
-    latest_first.all
+  def chronological_articles
+    self.articles.publishable.latest_first
   end
 
   def self.find_by_params(params)
@@ -27,8 +26,6 @@ class Tag < ActiveRecord::Base
   end
 
   def self.find_or_create(keyword)
-    t = Tag.find_by_keyword(keyword)
-    t = Tag.create(:keyword => keyword) if t.nil?
-    t
+    Tag.find_by_keyword(keyword) || Tag.create(:keyword => keyword)
   end
 end
