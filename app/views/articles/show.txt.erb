@@ -1,0 +1,30 @@
+<%= @article.title %>
+<%= "-" * @article.title.length %>
+
+### Author
+	
+<%= @article.author %>
+
+### Publication Date
+
+<%= @article.published_at %>
+
+<% if @article.recently_updated? %>
+### Updated
+
+<%= @article.updated_at %>
+<% end %>
+
+<% if @article.tags.length > 0 %>
+### Tags
+
+<%= @article.tags.map { |t| t.keyword }.join(', ') %> 
+<% end %>
+
+### Permalink
+
+<%= article_url(@article) %>
+
+### Content
+
+<%= word_wrap @article.content, 80 %>

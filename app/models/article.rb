@@ -51,6 +51,10 @@ class Article < ActiveRecord::Base
     self.stage >= Site::Application.config.required_milestone_commits 
   end
 
+  def recently_updated?
+    self.published_at < self.updated_at
+  end
+
   def commit
     return false unless can_make_milestone_commit?
     self.stage += 1

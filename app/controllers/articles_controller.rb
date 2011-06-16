@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   include ApplicationHelper
-  respond_to :html, :json, :xml, :rss
+  respond_to :html, :json, :xml, :rss, :txt
 
   def index
     set(:page, 0)

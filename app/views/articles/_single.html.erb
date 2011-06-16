@@ -1,5 +1,5 @@
 <%
-  if @article.published_at < @article.updated_at
+	if @article.recently_updated?
     display_updated = true
     justification = "&nbsp;".html_safe * 3
   else

@@ -1,0 +1,17 @@
+<%= get_config(:main_title) %>
+<%= "=" * get_config(:main_title).length %>
+
+<%= get_config(:main_tagline) %>
+<%= "-" * get_config(:main_tagline).length %>
+
+### All Articles
+
+<% @articles.each do |article| %>
+
+#### <%= article.title %>
+
+<%= article_url(article) %>
+
+<%= snip_content(article.content) %>
+
+<% end %>
