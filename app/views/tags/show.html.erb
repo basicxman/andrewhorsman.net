@@ -1,3 +1,4 @@
 <%= add_header("Viewing #{@tag.keyword}") %>
+<p>Tag has a weight of <%= @tag.weight %>%</p>
 <br />
 <%= render "articles/multi", :locals => { :articles => @articles } %>

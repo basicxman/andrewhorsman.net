@@ -13,6 +13,10 @@ class Tag < ActiveRecord::Base
     "#{self.id}-#{self.keyword}"
   end
 
+  def weight
+    (self.articles.count / Article.count.to_f * 100).round(2)
+  end
+
   def chronological_articles
     self.articles.publishable.latest_first
   end
