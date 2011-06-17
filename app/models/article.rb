@@ -13,8 +13,6 @@ class Article < ActiveRecord::Base
 
   attr_accessor :file
 
-  before_save :process_article
-
   def to_param
     "#{self.id}-#{self.title.parameterize}"
   end
@@ -75,10 +73,6 @@ class Article < ActiveRecord::Base
 
   def unpublish
     self.update_attributes :published_at => nil
-  end
-
-  def process_article
-    self.content = ArticleProcessing.process_content(self.content)
   end
 
   def self.new_article_from_file(path)
