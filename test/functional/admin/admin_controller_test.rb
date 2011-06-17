@@ -18,8 +18,8 @@ class Admin::AdminControllerTest < ActionController::TestCase
   test "should display articles table on console" do
     login_as_admin
     get :index
-    assert_select "#full-content table"
-    assert_select "#full-content table tbody tr", :count => Article.count
+    assert_select "#full-content table#articles-console"
+    assert_select "#full-content table#articles-console tbody tr", :count => Article.count
   end
 
   test "should redirect to login form if logged out" do

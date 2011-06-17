@@ -1,5 +1,6 @@
 class Article < ActiveRecord::Base
   include ArticlesHelper
+
   has_many :taggings
   has_many :tags, :through => :taggings
 
@@ -11,6 +12,8 @@ class Article < ActiveRecord::Base
   scope :frontpage,    lambda { publishable.latest_first }
 
   attr_accessor :file
+
+  before_save :process_article
 
   def to_param
     "#{self.id}-#{self.title.parameterize}"
@@ -55,7 +58,7 @@ class Article < ActiveRecord::Base
   end
 
   def recently_updated?
-    self.published_at < self.updated_at
+    self.published_at && self.published_at < self.updated_at
   end
 
   def commit
@@ -74,9 +77,13 @@ class Article < ActiveRecord::Base
     self.update_attributes :published_at => nil
   end
 
+  def process_article
+    self.content = ArticleProcessing.process_content(self.content)
+  end
+
   def self.new_article_from_file(path)
     content = File.read(path)
-    Article.new(process_article_file_contents(content))
+    Article.new(ArticleProcessing.process_input_file(content))
   end
 
   def self.available_pages
@@ -93,31 +100,6 @@ class Article < ActiveRecord::Base
 
   def self.find_by_tags(tags)
     publishable.find(:all, :include => :tags, :conditions => ["tags.keyword IN (?)", tags])
-  end
-
-  private
-
-  def self.header_var(string, var)
-    m = string.match(/^@#{var}:\s*(.*)$/)
-    m.nil?? "" : m[1]
-  end
-
-  def self.process_article_file_contents(data)
-    contents = data.split("\n")
-    header   = ""
-    index    = 0
-    contents.each do |line|
-      break if line.blank?
-      header += line + "\n"
-      index += 1
-    end
-
-    title   = header_var(header, "title")
-    author  = header_var(header, "author")
-    tags    = header_var(header, "tags")
-    content = contents[index + 1..-1].join("\n")
-
-    { :title => title, :author => author, :tag_list => tags, :content => content }
   end
 
 end
