@@ -2,10 +2,13 @@
   <%= add_header("Administration Console") %>
   <br />
   <%= link_to "New Article", new_admin_article_path, :title => "New Article" %>
+  <%= link_to "New Reading Item", new_admin_reading_item_path, :title => "New Reading Item" %>
   <br />
   <br />
 </div>
 <div id="full-content">
+  <%= render "admin/reading_items/view", :locals => { :reading_items => @reading_items } %>
+  <br /><br />
   <%= render "admin/articles/view_meta", :locals => { :articles => @articles } %>
 </div>
 <br />

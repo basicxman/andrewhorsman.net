@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Link</th>
+    <th>Rating</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <% @reading_items.each do |item| %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><%= item.name %></td>
+        <td><%= item.link %></td>
+        <td><%= item.rating %></td>
+        <td><%= link_to "Edit", edit_admin_reading_item_path(item), :title => "Edit" %></td>
+        <td><%= link_to "Delete", admin_reading_item_path(item), :method => :delete, :title => "Delete", :confirm => "Are you sure?" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

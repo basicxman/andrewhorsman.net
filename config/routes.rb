@@ -10,9 +10,12 @@ Site::Application.routes.draw do
       end
     end
 
+    resources :reading_items, :except => [:index]
+
     get "/" => "admin#index"
   end
 
+  # Authentication
   match "login"      => "user#login",      :via => :post, :as => :login
   match "logout"     => "user#logout",     :via => :get,  :as => :logout
   match "login_form" => "user#login_form", :via => :get
@@ -27,6 +30,9 @@ Site::Application.routes.draw do
   # Tags
   match "tags/multiple/:keywords" => "tags#show_multiple", :as => :show_multiple_tags
   resources :tags, :only => [:index, :show]
+
+  # Reading List
+  match "reading-list" => "reading_items#list", :as => :reading_list
 
   # Root
   root :to => "articles#index"
