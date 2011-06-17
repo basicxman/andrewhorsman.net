@@ -51,4 +51,17 @@ class ApplicationController < ActionController::Base
     session[:redirect_to] = nil
     r
   end
+
+  # Sidebar
+  def render_sidebar_widget(path, item = nil)
+    locals = {}
+    locals = self.send(item) unless item.nil?
+    render_to_string(:partial => path, :locals => locals).html_safe
+  end
+  helper_method :render_sidebar_widget
+
+  def reading_list
+    set(:reading_items, ReadingItem.updated_desc.all)
+    { :reading_items => @reading_items }
+  end
 end
