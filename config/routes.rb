@@ -1,5 +1,9 @@
 Site::Application.routes.draw do
 
+  get "pages/about_me"
+
+  get "pages/contact_me"
+
   # Administration
   namespace :admin do
     resources :articles, :except => [:index] do
@@ -33,6 +37,9 @@ Site::Application.routes.draw do
 
   # Reading List
   match "reading-list" => "reading_items#list", :as => :reading_list
+
+  # Pages
+  match "about-me"   => "pages#about_me",  :as => :about_me
 
   # Root
   root :to => "articles#index"
