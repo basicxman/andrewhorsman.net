@@ -1,9 +1,5 @@
 Site::Application.routes.draw do
 
-  get "pages/about_me"
-
-  get "pages/contact_me"
-
   # Administration
   namespace :admin do
     resources :articles, :except => [:index] do

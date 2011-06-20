@@ -54,24 +54,6 @@ class Admin::ArticlesControllerTest < ActionController::TestCase
     assert_equal "Testing!", Article.find(2).title
   end
 
-  test "should not update an article if the title is blank" do
-    put :update, :id => 2, :article => { :title => "" }
-    assert_response :success
-    assert_template :edit
-  end
-
-  test "should not update an article if the author is blank" do
-    put :update, :id => 2, :article => { :author => "" }
-    assert_response :success
-    assert_template :edit
-  end
-
-  test "should not update an article if the content is blank" do
-    put :update, :id => 2, :article => { :content => "" }
-    assert_response :success
-    assert_template :edit
-  end
-
   test "should update tags" do
     put :update, :id => 8, :article => { :tag_list => "foo bar" }
     assert_redirected_to admin_path

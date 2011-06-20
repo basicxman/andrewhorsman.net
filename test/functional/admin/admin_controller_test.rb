@@ -15,11 +15,24 @@ class Admin::AdminControllerTest < ActionController::TestCase
     assert_select "a[href='/admin/articles/new']"
   end
 
+  test "should display new reading item link on console" do
+    login_as_admin
+    get :index
+    assert_select "a[href='/admin/reading_items/new']"
+  end
+
   test "should display articles table on console" do
     login_as_admin
     get :index
     assert_select "#full-content table#articles-console"
     assert_select "#full-content table#articles-console tbody tr", :count => Article.count
+  end
+
+  test "should display reading items table on console" do
+    login_as_admin
+    get :index
+    assert_select "#full-content table#reading-items-console"
+    assert_select "#full-content table#reading-items-console tbody tr", :count => ReadingItem.count
   end
 
   test "should redirect to login form if logged out" do

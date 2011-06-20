@@ -1,0 +1,13 @@
+<%= form_for [:admin, @reading_item] do |f| %>
+  <%= f.label :link %><br />
+  <%= f.text_field :link %><%= error_for(:link, @reading_item) %><br />
+
+  <%= f.label :name %><br />
+  <%= f.text_field :name %><%= error_for(:name, @reading_item) %><br />
+
+  <%= f.label :rating %><br />
+  <%= f.text_field :rating %><%= error_for(:rating, @reading_item) %><br />
+
+  <br />
+  <%= f.submit %>
+<% end %>

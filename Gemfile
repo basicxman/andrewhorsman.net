@@ -9,6 +9,8 @@ gem 'jquery-rails'
 group :test do
   gem 'turn'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
-  gem 'guard'
+  gem 'guard', :git => "git://github.com/guard/guard.git"
   gem 'guard-minitest', :git => "git://github.com/guard/guard-minitest.git"
+  gem 'ruby-prof'
+  gem 'growl'
 end

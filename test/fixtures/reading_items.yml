@@ -1,11 +1,11 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
 one:
-  link: MyString
-  name: MyString
-  rating: 1
+  id: 1
+  link: http://google.com
+  name: Google
+  rating: 10
 
 two:
-  link: MyString
-  name: MyString
+  id: 2
+  link: http://bing.com
+  name: Bing
   rating: 1
