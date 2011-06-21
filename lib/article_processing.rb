@@ -26,11 +26,24 @@ class ArticleProcessing
     end
 
     def process_content(content)
+      content = syntax_highlight(content)
+      content = blockquote_fix(content)
+      content = RDiscount.new(content, :smart).to_html
       content = indentation(content)
     end
 
     def indentation(content)
-      content.gsub("  ", "&nbsp;&nbsp;")
+      content.gsub("  ", "<span class='tab'>&nbsp;&nbsp;</span>")
+    end
+
+    def blockquote_fix(content)
+      content.gsub(/^>.*?\n/) { |m| "#{m}>\n" }
+    end
+
+    def syntax_highlight(content)
+      content.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
+        CodeRay.scan($3, $2).div(:css => :class, :line_numbers => :table)
+      end
     end
 
   end
