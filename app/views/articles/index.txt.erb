@@ -12,7 +12,7 @@
 
 <%= article_url(article) %>
 
-<%= snip_content(article.content) %>
+<%= strip_tags(snip_content(article.content)) %>
 
 <% end %>
 

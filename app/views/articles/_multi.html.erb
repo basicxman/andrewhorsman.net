@@ -6,7 +6,7 @@
     <% if article.tags.length > 0 %>
       <%= render "tags/single_line_tags", :locals => { :tags => @tags } %>
     <% end %></div>
-    <div class="article-content"><%= snip_content(article.content.html_safe) %></div>
+    <div class="article-content"><%= snip_content(article.content_html.html_safe) %></div>
     <br />
   <% end %>
 </div>

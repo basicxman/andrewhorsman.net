@@ -11,6 +11,8 @@ class Article < ActiveRecord::Base
   scope :updated_desc, lambda { order("updated_at DESC") }
   scope :frontpage,    lambda { publishable.latest_first }
 
+  before_save :process_content_for_html
+
   attr_accessor :file
 
   def to_param
@@ -73,6 +75,10 @@ class Article < ActiveRecord::Base
 
   def unpublish
     self.update_attributes :published_at => nil
+  end
+
+  def process_content_for_html
+    self.content_html = ArticleProcessing.process_content(self.content)
   end
 
   def self.new_article_from_file(path)

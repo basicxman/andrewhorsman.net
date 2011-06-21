@@ -26,12 +26,7 @@ class ArticleProcessing
     end
 
     def process_content(content)
-      content = breaklines(content)
       content = indentation(content)
-    end
-
-    def breaklines(content)
-      content.gsub("\n", "<br />")
     end
 
     def indentation(content)

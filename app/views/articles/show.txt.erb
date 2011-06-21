@@ -27,4 +27,4 @@
 
 ### Content
 
-<%= word_wrap @article.content, 80 %>
+<%= strip_tags word_wrap @article.content, 80 %>
