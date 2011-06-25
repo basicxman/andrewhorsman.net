@@ -22,6 +22,7 @@ class Admin::ArticlesController < ApplicationController
       @article = Article.new(params[:article])
     end
     redirect_or_render(admin_path, :new) do
+      @articlel.update_html = true
       @article.save
     end
   end
@@ -29,6 +30,7 @@ class Admin::ArticlesController < ApplicationController
   def update
     @article = Article.find_by_params(params)
     redirect_or_render(admin_path, :edit) do
+      @article.update_html = true
       @article.update_attributes(params[:article])
     end
   end

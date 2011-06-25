@@ -6,9 +6,9 @@
       <th>Tags</th>
       <th>Author</th>
       <th>#</th>
-      <th>Last Commit Date</th>
-      <th>Show</th>
-      <th>Delete</th>
+      <th>Time to Commit</th>
+      <th></th>
+      <th></th>
       <th>Staging</th>
       <th>Data</th>
     </tr>
@@ -16,8 +16,8 @@
   <tbody>
     <% @articles.each do |article| %>
       <%
-        @article_cur    = article
-        @tags           = article.tags
+        @article_cur = article
+        @tags        = article.tags
       %>
       <tr>
         <td><%= article.id %></td>
@@ -25,11 +25,11 @@
         <td><%= render "tags/single_line_tags", :locals => { :tags => @tags } %></td>
         <td><%= article.author %></td>
         <td><%= article.stage %></td>
-        <td><%= article.last_commit_date || "No commit yet." %></td>
-        <td><%= link_to "Edit", edit_admin_article_path(article), :title => "Edit/Show #{article.title}" %></td>
-        <td><%= link_to "Delete", admin_article_path(article), :method => :delete, :title => "Delete #{article.title}", :confirm => "Are you sure?" %></td>
+        <td><%= time_required(article.last_commit_date) %></td>
+        <td><%= link_to "E", edit_admin_article_path(article), :title => "Edit/Show #{article.title}" %></td>
+        <td><%= link_to "X", admin_article_path(article), :method => :delete, :title => "Delete #{article.title}", :confirm => "Are you sure?" %></td>
         <td><%= render "admin/articles/commit_publish", :locals => { :article_cur => @article_cur } %></td>
-        <td><%= link_to "Data", admin_article_path(article, :format => :txt), :title => "Data" %></td>
+        <td><%= link_to "Data", admin_article_path(article, :format => :txt), :title => "Data", :target => "_blank" %></td>
       </tr>
     <% end %>
   </tbody>
