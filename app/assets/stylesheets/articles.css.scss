@@ -1,4 +1,5 @@
 @import "styling.css.scss";
+@import "pygments_solarized.css.scss";
 
 /* Single article styling. */
 .article-single {
@@ -137,8 +138,39 @@
 
 }
 
-.syntax {
+$code_border_radius: 10px;
+table.highlighttable {
+  border-spacing: 0px;
+  td.linenos {
+    background-color: lighten($base02, 10%);
+    color: $base1;
+    padding: 0px 8px;
+    margin: 0px;
+
+    border-top-left-radius: $code_border_radius;
+    border-bottom-left-radius: $code_border_radius;
+  }
+
+  td.code {
+    background-color: $base02;
+    color: $base1;
+    padding: 0px 8px;
+    margin: 0px;
+
+    border-top-right-radius: $code_border_radius;
+    border-bottom-right-radius: $code_border_radius;
+  }
+
+}
+
+.highlight {
+  padding-top: 8px;
+  width: $content_width - 40px;
   overflow-x: auto;
+
+  pre {
+    @include r;
+  }
 
   &::-webkit-scrollbar {
     height: 8px;
@@ -148,15 +180,17 @@
   &::-webkit-scrollbar-track {
     -webkit-border-radius: $scrollbar_radius;
     border-radius: $scrollbar_radius;
-    background-color: rgba(80, 80, 80, 0.2);
+    background-color: rgba($base1, 0.2);
   }
 
   &::-webkit-scrollbar-thumb {
     -webkit-border-radius: $scrollbar_radius;
     border-radius: $scrollbar_radius;
-    background-color: rgba(80, 80, 80, 0.5);
+    background-color: rgba($base1, 0.5);
     &:window-inactive {
-      background-color: rgba(80, 80, 80, 0.35);
+      background-color: rgba($base1, 0.3);
     }
   }
+
+  @include pygments_solarized;
 }

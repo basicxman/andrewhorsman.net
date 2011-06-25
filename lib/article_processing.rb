@@ -46,8 +46,7 @@ class ArticleProcessing
     # Add syntax highlighting.
     def syntax_highlight(content)
       content.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
-        lang = $2 || :text
-        "<div class='syntax'>" + highlight($3, lang.to_sym) + "</div>"
+        highlight($3, ($2 || :text).to_sym)
       end
     end
 
@@ -66,10 +65,7 @@ class ArticleProcessing
         line_numbers << index + 1 if line =~ /\*{3}(\r|\n|$)/
       end
 
-      {
-        :code  => code.gsub(/\s*\*{3}(\r?\n|$)/, "\n"),
-        :lines => line_numbers.join(",")
-      }
+      { :code => code.gsub(/\s*\*{3}(\r?\n|$)/, "\n"), :lines => line_numbers.join(",") }
     end
 
   end

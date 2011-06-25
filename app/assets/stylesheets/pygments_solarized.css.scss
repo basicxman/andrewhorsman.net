@@ -1,0 +1,200 @@
+$base03:  #002b36;
+$base02:  #073642;
+$base01:  #586e75;
+$base00:  #657b83;
+$base0:   #839496;
+$base1:   #93a1a1;
+$base2:   #eee8d5;
+$base3:   #fdf6e3;
+$yellow:  #b58900;
+$orange:  #cb4b16;
+$red:     #dc322f;
+$magenta: #d33682;
+$violet:  #6c71c4;
+$blue:    #268bc2;
+$cyan:    #2aa198;
+$green:   #859900;
+
+@mixin pygments_solarized {
+
+  /* Highlighted line */
+  .hll {}
+
+  /* Comment */
+  /* Comment - Mulitline */
+  /* Comment - Single */
+  /* Comment - Deleted */
+  .c, cm, .c1, .cs {
+    font-style: italic;
+    color: $base1;
+  }
+
+	/* Error */
+	.err {
+    border: 1px solid $red;
+	}
+
+  /* Keyword */
+  .k { color: $base3; }
+
+  /* Operator */
+  .o {}
+
+  /* Comment - Preproc */
+  .cp { color: lighten($base1, 10%); }
+
+  /* Generic - Deleted */
+  .gd {}
+
+  /* Generic - Emph */
+  .ge { font-style: italic; }
+
+  /* Generic - Error */
+  .gr {}
+
+  /* Generic - Heading */
+  .gh {}
+
+  /* Generic - Inserted */
+  .gi {}
+
+  /* Generic - Output */
+  .go {}
+
+  /* Generic - Prompt */
+  .gp {}
+
+  /* Generic - Strong */
+  .gs {}
+
+  /* Generic - Subheading */
+  .gu {}
+
+  /* Generic - Traceback */
+  .gt {}
+
+  /* Keyword - Constant */
+  .kc { font-weight: bold; }
+  /* Keyword - Declaration */
+  /* Keyword - Namespace */
+  /* Keyword - Reserved */
+  .kc, .kd, .kn, .kr {
+    color: darken($green, 15%);
+    font-weight: bold;
+  }
+
+  /* Keyword - Pseudo */
+  .kp { color: darken($green, 15%); }
+
+  /* Keyword - Type */
+  .kt {}
+
+  /* Literal - Number */
+  .m {}
+
+  /* Literal - String */
+  .s {}
+
+  /* Name - Attribute */
+  .na {}
+
+  /* Name - Builtin */
+  .nb {}
+
+  /* Name - Class */
+  .nc {}
+
+  /* Name - Constant */
+  .no {}
+
+  /* Name - Decorator */
+  .nd {}
+
+  /* Name - Entity */
+  .ni {}
+
+  /* Name - Exception */
+  .ne {}
+
+  /* Name - Function */
+  .nf {}
+
+  /* Name - Label */
+  .nl {}
+
+  /* Name - Namespace */
+  .nn {}
+
+  /* Name - Tag */
+  .nt {}
+
+  /* Name - Variable */
+  .nv {}
+
+  /* Operator - Word */
+  .ow {}
+
+  /* Text - Whitespace */
+  .w {}
+
+  /* Literal - Number - Float */
+  .mf {}
+
+  /* Literal - Number - Hex */
+  .mh {}
+
+  /* Literal - Number - Integer */
+  .mi {}
+
+  /* Literal - Number - Oct */
+  .mo {}
+
+  /* Literal - String - Backtick */
+  .sb {}
+
+  /* Literal - String - Char */
+  .sc {}
+
+  /* Literal - String - Doc */
+  .sd {}
+
+  /* Literal - String - Double */
+  .s2 {}
+
+  /* Literal - String - Escape */
+  .se {}
+
+  /* Literal - String - Heredoc */
+  .sh {}
+
+  /* Literal - String - Interpol */
+  .si {}
+
+  /* Literal - String - Other */
+  .sx {}
+
+  /* Literal - String - Regex */
+  .sr {}
+
+  /* Literal - String - Single */
+  .s1 {}
+
+  /* Literal - String - Symbol */
+  .ss {}
+
+  /* Name - Builtin - Pseudo */
+  .bp {}
+
+  /* Name - Variable - Class */
+  .vc {}
+
+  /* Name - Variable - Global */
+  .vg {}
+
+  /* Name - Variable - Instance */
+  .vi {}
+
+  /* Literal - Number - Integer - Long */
+  .il {}
+
+}
