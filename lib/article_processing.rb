@@ -32,17 +32,21 @@ class ArticleProcessing
       content = indentation(content)
     end
 
+    # HTML renders multiple spaces not within a <pre> tag as a single space,
+    # add literal "&nbsp;"s with a .tab span warpper.
     def indentation(content)
       content.gsub("  ", "<span class='tab'>&nbsp;&nbsp;</span>")
     end
 
+    # Markdown blockquotes breaklines are annoying, add a blank ">\n" to every >
     def blockquote_fix(content)
       content.gsub(/^>.*?\n/) { |m| "#{m}>\n" }
     end
 
+    # Use CodeRay to add syntax highlighting.
     def syntax_highlight(content)
       content.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
-        CodeRay.scan($3, $2).div(:css => :class, :line_numbers => :table)
+        "<div class='syntax'>" + CodeRay.scan($3.strip, $2).div(:css => :class, :line_numbers => :table) + "</div>"
       end
     end
 

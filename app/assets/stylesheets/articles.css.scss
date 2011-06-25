@@ -136,3 +136,27 @@
   }
 
 }
+
+.syntax {
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  $scrollbar_radius: 6px;
+  &::-webkit-scrollbar-track {
+    -webkit-border-radius: $scrollbar_radius;
+    border-radius: $scrollbar_radius;
+    background-color: rgba(80, 80, 80, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    -webkit-border-radius: $scrollbar_radius;
+    border-radius: $scrollbar_radius;
+    background-color: rgba(80, 80, 80, 0.5);
+    &:window-inactive {
+      background-color: rgba(80, 80, 80, 0.35);
+    }
+  }
+}
