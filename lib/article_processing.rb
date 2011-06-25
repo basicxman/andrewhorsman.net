@@ -43,11 +43,33 @@ class ArticleProcessing
       content.gsub(/^>.*?\n/) { |m| "#{m}>\n" }
     end
 
-    # Use CodeRay to add syntax highlighting.
+    # Add syntax highlighting.
     def syntax_highlight(content)
       content.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
-        "<div class='syntax'>" + CodeRay.scan($3.strip, $2).div(:css => :class, :line_numbers => :table) + "</div>"
+        lang = $2 || :text
+        "<div class='syntax'>" + highlight($3, lang.to_sym) + "</div>"
       end
+    end
+
+    # Syntax highlight with Albino.
+    def highlight(code, lang)
+      code = process_code(code)
+      a = Albino.new(code[:code], lang, :html)
+      a.colorize(:O => "linenos=table", :P => "hl_lines=#{code[:lines]}")
+    end
+
+    # Parse code for things like highlighted lines.
+    def process_code(code)
+      line_numbers = []
+      code.strip!
+      code.split("\n").each_with_index do |line, index|
+        line_numbers << index + 1 if line =~ /\*{3}(\r|\n|$)/
+      end
+
+      {
+        :code  => code.gsub(/\s*\*{3}(\r?\n|$)/, "\n"),
+        :lines => line_numbers.join(",")
+      }
     end
 
   end

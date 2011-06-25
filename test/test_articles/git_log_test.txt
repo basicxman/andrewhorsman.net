@@ -1,0 +1,74 @@
+@title: Git Log Sample
+@author: John Smith
+@tags: git log testing
+
+Git log I'm currently working with...
+
+> f512d4ab04cbafd10dc20d34f068fc6e48bc049f Fixed txt formatting.
+> a40ebf61b280ebf7561bb6dec90b773aafd48bde Syntax highlighting improvements! Article formatting just needs testing and then this is a completed milestone.
+> 0bc684a520ba5ae6dc806153ced4729204e92547 Started syntax highlighting and markdown formatting (using rdiscount).  Needs some bug fixing.
+> e4c242b587162aa5a7a800210e1a4ac658e8499e Adding improvements\!
+> d2d6f9b42de33ff8bc372c1c8b154a81a64e7af9 Added more tests, put some tests in unit/ where they should be.  Finished reading item stuff and added ruby-prof and growl as a development depedency for Guard.
+> 926ca49fc5c79998817b264d39aa475f88ddb998 Added Guard continous testing.
+> 410c515f024ad21a9725a820d4c0034004f9ecde Contact me on sidebar, pages controller.
+> 9c10568aef858529be469dc42ad12a6bf6e764d2 Added sidebar widgeting.
+> c045c06a8333c7a0d54ec3d61fa18b79b1e7732a Err, removed the before_save operation.  These changes need to be done only when rendering HTML.
+> a5ece300d77841de6cd8cb71701e7ad14b3d4938 Misc changes, most importantly moved article content and input file processing to a module in lib/
+> 26f0c3cac1d50373519756d65c88fd17b1f9cac4 Added reading list.
+> d6b76788c76840918795de3f5f7aec15197a46d5 Allows creating a new article via file upload, can download valid data file from previous articles.
+> 8fff1f6577f1e031c794c7847950388f3b0d235f Added tag weight calculation.
+> 72c7096c82e891037c733459fecfbfd0f5500182 Added text/plain mime type with response for articles#index and articles#show because ASCII glory is required and I'm a terrible person.
+> 24e43b1242dd2b4d3a0fc67aa0695dd80e09dd80 Misc refactoring on controllers and models.
+> 383c73b6ac317a69e3328b53c5ad8229bb55349c Finished initial tests, Code to Test ratio of 1:1.1!
+> 12a88b5c82ddb2e07a080a607aaa252b4cfcfc83 Smart redirection if authentication required.
+> 41ea3823957cd94116ece5373b96c24394337059 Whoops, forgot to update those tests after placing new tag fixtures.
+> ace7882c261f847bc791e359d553b25f3b17b8c3 Misc fixes.
+> 3d17eeb3401dd3e1d7409b0b69ee1a102a769393 Added tests for Articles, Users and Tags.
+> d11d27b85cbe815ade2be567d18c44e6954705cc Started writing tests.
+> a4c3dfd3b2acb2d66ef57ff31ecd22395c548485 Replaced old ArticlesTags table method of tagging with a Tagging model (idea from @ryanb).
+> d4efa7944a96b05b8f0ba74dcd599f09c7990734 Smarter content snipping, will not cut off a word unless it extends 15 characters beyond the limit.
+> bc5b57f4c0f8b57e71eeebd343a5e56f702fd999 Added administrator authentication.
+> 96cdd0b7b5a86b8685b9741db8ee3aeec1dfed45 Oops, forgot to make open source link open in a new tab.
+> 12b390b1e5a9e7d6fbc692abce74c16ba703c6d5 Improved UX.
+> 5c4d87d19b109d410dcd55f6e0ae5441984a076e Fixed prev/next article formatting.  Added RSS to frontpage articles.
+> 7965e3775bf0bb04b2e0e2c24138a0cbd76ce4a8 Added pagination to homepage.
+> 62f3bb2e8e873ffc836f5913bc03ab0bf72d5245 Improved (and added an article series for pagination development) seeds.rb
+> 83364b433cf821ce2b049d863cfdb1e788eb48d2 Added footer, placed titles, removed unnecessary templates.
+> 09312b2eb67082cd3cb3d1d266810d2b0f23791a Finished basic tagging capability, styled more, forgot published checking in some areas.
+> d87af5e6e75977cb016de46f7f9aee90e28a0801 Added publishing notice.
+> 0dbd4722a1c0e371726be6f11dfc41474d27ebdb Back up to where the previous version was, administration console has basic control over articles.
+> e4d65ab4ffd905a818556eb13a8786bb77b31d23 Merge branch 'development'
+> ae3f82e524608cfe094a8141af3ccf9522da08fb Project back up to old stuff (mostly, lacking administration things).  Everything is much cleaner.
+> da17bca0a5023f37863f2cf3ea2cba4657c66e5b Added gitignore for initial project.
+
+Generated using the following...
+
+<code>
+[alias]
+  a = add                   # Add.
+  ac = commit -a -m         # Add all files and commit with message.
+  aws = !git add . && git ss # Add all fiels and show status
+  last = log -1             # Show last commit. 
+  l = log                   # w00t, log.
+  ls = log --pretty=oneline # Show log with oneliners. ***
+  c = commit -m             # Commit with message.
+  d = diff HEAD HEAD~1      # Get a diff between the last commit and second last commit.
+  ddm = diff master development # Get a diff between master and development.
+  wd = !git diff $1 HEAD:$1	# Get a diff between the committed version of a file and the working version of a file.
+  s = status                # Full status.
+  ss = status -s            # Short statuses
+  t = tag                   # Tag current commit.
+  b = branch                # List branches.
+  db = branch -d            # Delete a branch.
+  cb = checkout             # Checkout a branch.
+  ccb = checkout -b         # Create a new branch and checkout.
+  m = merge                 # Merge a branch to the current one.
+  mt = mergetool            # Launch the merge tool (resolving configs).
+  lmb = branch --merged     # List all branches merged with the current one.
+  lnmb = branch --no-merged # List all branches not merged with the current one.
+  r = rebase                # Rebase a branch onto the current one.
+  p = push origin master    # GitHub push.
+  pb = push origin          # Push to origin.
+  st = stash                # Stash current changes.
+  as = stash apply          # Apply last stash.
+</code>

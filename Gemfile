@@ -6,7 +6,7 @@ gem 'sass'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'rdiscount'
-gem 'coderay'
+gem 'albino'
 
 group :test do
   gem 'turn'
