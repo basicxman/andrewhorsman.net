@@ -35,7 +35,10 @@ $green:   #859900;
 	}
 
   /* Keyword */
-  .k { color: $base3; }
+  .k {
+    color: $base3;
+    font-weight: 600;
+  }
 
   /* Operator */
   .o {}
@@ -74,17 +77,18 @@ $green:   #859900;
   .gt {}
 
   /* Keyword - Constant */
-  .kc { font-weight: bold; }
+  .kc { font-weight: 600; }
+
   /* Keyword - Declaration */
   /* Keyword - Namespace */
   /* Keyword - Reserved */
   .kc, .kd, .kn, .kr {
-    color: darken($green, 15%);
-    font-weight: bold;
+    color: $red;
+    font-weight: 600;
   }
 
   /* Keyword - Pseudo */
-  .kp { color: darken($green, 15%); }
+  .kp { color: $red; }
 
   /* Keyword - Type */
   .kt {}
@@ -99,13 +103,13 @@ $green:   #859900;
   .na {}
 
   /* Name - Builtin */
-  .nb {}
+  .nb { color: lighten($yellow, 20%); }
 
   /* Name - Class */
-  .nc {}
+  .nc { color: $yellow; }
 
   /* Name - Constant */
-  .no {}
+  .no { color: $yellow; }
 
   /* Name - Decorator */
   .nd {}
@@ -117,7 +121,7 @@ $green:   #859900;
   .ne {}
 
   /* Name - Function */
-  .nf {}
+  .nf { color: $blue; }
 
   /* Name - Label */
   .nl {}
@@ -132,7 +136,7 @@ $green:   #859900;
   .nv {}
 
   /* Operator - Word */
-  .ow {}
+  .ow { color: lighten($yellow, 20%); }
 
   /* Text - Whitespace */
   .w {}
@@ -174,7 +178,7 @@ $green:   #859900;
   .sx {}
 
   /* Literal - String - Regex */
-  .sr {}
+  .sr { color: $red; }
 
   /* Literal - String - Single */
   .s1 {}

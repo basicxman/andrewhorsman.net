@@ -5,6 +5,114 @@
 Let's take a look at some awesome Ruby code!
 
 <code lang="ruby">
+class Admin::ArticlesController < ApplicationController
+  respond_to :html, :txt
+
+  before_filter :authenticate_admin
+
+  def new
+    expose(:article, Article.new)
+  end
+
+  def edit
+    expose(:article, Article.find_by_params(params))
+  end
+
+  def show
+    expose(:article, Article.find_by_params(params))
+  end
+
+  def create
+    if params[:article][:file]
+      @article = Article.new_article_from_file(params[:article][:file].tempfile)
+    else
+      @article = Article.new(params[:article])
+    end
+    redirect_or_render(admin_path, :new) do
+      @article.save
+    end
+  end
+
+  def update
+    @article = Article.find_by_params(params)
+    redirect_or_render(admin_path, :edit) do
+      @article.update_attributes(params[:article])
+    end
+  end
+
+  def destroy
+    Article.find_by_params(params).destroy
+    redirect_to admin_path
+  end
+
+  def commit
+    notice = commit_notice(Article.find_by_params(params).commit)
+    redirect_to admin_path, :notice => notice
+  end
+
+  def publish
+    notice = publish_notice(Article.find_by_params(params).publish)
+    redirect_to admin_path, :notice => notice
+  end
+
+  def unpublish
+    Article.find_by_params(params).unpublish
+    redirect_to admin_path, :notice => "Unpublished."
+  end
+
+  private
+  
+  def commit_notice(b)
+    b ? "Committed!" : "Unable to commit at this time."
+  end
+
+  def publish_notice(b)
+    b ? "Published!" : "Unable to publish at this time."
+  end
+end
+</code>
+
+<code lang="ruby">
+module ApplicationHelper
+
+  def get_config(sym)
+    Site::Application.config.send(sym)
+  end
+
+  def construct_title(title = nil)
+    a = if title.blank?
+      get_config(:main_title)
+    else
+      "#{title} | #{get_config(:main_title)}"
+    end
+    content_for :title, a
+  end
+
+  def add_header(title)
+    construct_title(title)
+    "<h3>#{title}</h3>".html_safe
+  end
+
+  def error_for(sym, model, extra = "")
+    if model.errors[sym].length > 0
+      "<span class='field-error'>#{model.errors[sym].first}</span>#{extra}".html_safe
+    end
+  end
+
+  # Smarter content snipping.
+  def snip_content(content)
+    l = get_config(:short_content_length)
+    return content if content.length <= l
+
+    i = l + content[l..-1].index(/[!\?\.;,\s%]|$/)
+    i = l if i.nil? or i - 15 > l
+    content[0...i] + "..."
+  end
+
+end
+</code>
+
+<code lang="ruby">
 class Article < ActiveRecord::Base
   include ArticlesHelper
 

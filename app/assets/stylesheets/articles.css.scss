@@ -1,6 +1,8 @@
 @import "styling.css.scss";
 @import "pygments_solarized.css.scss";
 
+.testing { color: #100; }
+
 /* Single article styling. */
 .article-single {
   .top-link {
@@ -141,11 +143,17 @@
 $code_border_radius: 10px;
 table.highlighttable {
   border-spacing: 0px;
+
   td.linenos {
     background-color: lighten($base02, 10%);
     color: $base1;
     padding: 0px 8px;
     margin: 0px;
+
+    pre {
+      width: 30px !important;
+      text-align: right;
+    }
 
     border-top-left-radius: $code_border_radius;
     border-bottom-left-radius: $code_border_radius;
@@ -161,11 +169,19 @@ table.highlighttable {
     border-bottom-right-radius: $code_border_radius;
   }
 
+  pre { line-height: 140%; }
+}
+
+.syntax {
+  min-width: $content_width;
+  max-width: $content_width;
+  margin: 10px 0px;
 }
 
 .highlight {
   padding-top: 8px;
-  width: $content_width - 40px;
+  width: $content_width - 25px;
+  min-width: $content_width - 25px;
   overflow-x: auto;
 
   pre {

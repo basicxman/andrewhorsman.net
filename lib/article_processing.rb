@@ -46,7 +46,7 @@ class ArticleProcessing
     # Add syntax highlighting.
     def syntax_highlight(content)
       content.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
-        highlight($3, ($2 || :text).to_sym)
+        "<div class='syntax'>" + highlight($3, ($2 || :text).to_sym) + "</div>"
       end
     end
 
