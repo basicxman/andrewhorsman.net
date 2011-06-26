@@ -30,6 +30,7 @@ class ArticleProcessing
       content = blockquote_fix(content)
       content = RDiscount.new(content, :smart).to_html
       content = indentation(content)
+      content = add_tooltips(content)
     end
 
     # HTML renders multiple spaces not within a <pre> tag as a single space,
@@ -43,15 +44,22 @@ class ArticleProcessing
       content.gsub(/^>.*?\n/) { |m| "#{m}>\n" }
     end
 
+    # Translate <tooltip> tags into something that actually works in a browser.
+    def add_tooltips(content)
+      content.gsub(/\<tooltip title="(.+?)"\>(.+?)\<\/tooltip\>/m) do
+        "<span class='tooltip'><span class='tooltip-regular'>#{$2}</span><span class='tooltip-full'>#{$1}</span></span>"
+      end
+    end
+
     # Add syntax highlighting.
     def syntax_highlight(content)
       content.gsub(/\<code( lang="(.+?)")?\>(.+?)\<\/code\>/m) do
-        "<div class='syntax'>" + highlight($3, ($2 || :text).to_sym) + "</div>"
+        "<div class='syntax'>" + pygmentize($3, ($2 || :text).to_sym) + "</div>"
       end
     end
 
     # Syntax highlight with Albino.
-    def highlight(code, lang)
+    def pygmentize(code, lang)
       code = process_code(code)
       a = Albino.new(code[:code], lang, :html)
       a.colorize(:O => "linenos=table", :P => "hl_lines=#{code[:lines]}")

@@ -116,3 +116,46 @@ html, body {
 div.field_with_errors {
   display:inline;
 }
+
+/* Tooltips */
+$tooltip_rad: 5px;
+.tooltip {
+  position: relative;
+
+  span.tooltip-regular {
+    text-decoration: underline;
+  }
+
+  span.tooltip-full {
+    display: none;
+  }
+
+  &:hover span.tooltip-full {
+    display: block;
+    position: absolute;
+
+    background-color: #2D80B7;
+    color: #fff;
+    font-size: 90%;
+
+    top: 18px;
+    left: 5px;
+    min-width: 200px;
+    padding: 5px;
+
+    border-top-right-radius: $tooltip_rad;
+    border-bottom-right-radius: $tooltip_rad;
+    border-bottom-left-radius: $tooltip_rad;
+  }
+}
+
+/* Quoting */
+blockquote {
+  margin: 10px 40px;
+  padding: 2px 20px;
+  border-left: 5px solid #aaa;
+
+  .tab {
+    margin-right: 10px;
+  }
+}
