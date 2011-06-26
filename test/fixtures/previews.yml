@@ -1,9 +1,5 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-one:
-  article_id: 1
-  hash_id: MyString
-
-two:
-  article_id: 1
-  hash_id: MyString
+<% 1.upto(24) do |n| %>
+preview-<%= n %>:
+  article_id: <%= n %>
+  hash_id: <%= n %>
+<% end %>

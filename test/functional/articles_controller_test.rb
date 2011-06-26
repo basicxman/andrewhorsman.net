@@ -40,7 +40,6 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should display an article" do
     get :show, :id => 5
     assert_select ".article-title h2", :text => "Published first"
-    assert_select ".article-content", :text => "Testing 1...2...3"
     assert_select ".article-author", :text => "by #{articles(:five).author}"
   end
 

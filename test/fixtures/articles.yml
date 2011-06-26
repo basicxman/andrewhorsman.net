@@ -3,12 +3,14 @@ one:
   id: 1
   title: Generic test article
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
 
 two:
   id: 2
   title: Test article at final stage
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
   last_commit_date: <%= Time.zone.now %>
   stage: 3
@@ -17,6 +19,7 @@ three:
   id: 3
   title: Test article allowed to make a commit
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
   last_commit_date: <%= Time.zone.now - 10.hours %>
   stage: 2
@@ -25,6 +28,7 @@ four:
   id: 4
   title: Test article, not enough time passed to make a commit
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
   last_commit_date: <%= Time.zone.now %>
   stage: 2
@@ -33,6 +37,7 @@ five:
   id: 5
   title: Published first
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
   last_commit_date: <%= Time.zone.now %>
   stage: 3
@@ -42,6 +47,7 @@ six:
   id: 6
   title: Published with future updated at
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
   stage: 3
   published_at: <%= Time.zone.now + 1.days %>
@@ -51,6 +57,7 @@ seven:
   id: 7
   title: Published with past updated at
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
   stage: 3
   published_at: <%= Time.zone.now %>
@@ -60,6 +67,7 @@ eight:
   id: 8
   title: Article with tags
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
   stage: 3
   published_at: <%= Time.zone.now + 5.hours %>
@@ -68,6 +76,7 @@ nine:
   id: 9
   title: Article with long tags
   author: John Smith
+  content_html: Testing
   content: Testing 1...2...3
   stage: 3
   published_at: <%= Time.zone.now - 5.hours %>
@@ -76,6 +85,7 @@ ten:
   id: 10
   title: Very long article
   author: John Smith
+  content_html: Testing
   content: <%= lipsum.gsub("\n", "") %>
   stage: 3
   published_at: <%= Time.zone.now %>
@@ -83,6 +93,7 @@ ten:
 eleven:
   id: 11
   title: Article with lots of tags
+  content_html: Testing
   content: Testing 1...2...3
   stage: 3
   published_at: <%= Time.zone.now %>
@@ -92,6 +103,7 @@ series_<%= n %>:
   id: <%= n %>
   title: Series part <%= n %>
   author: John Smith
+  content_html: Testing
   content: I'm in a series!
   stage: 3
   published_at: <%= Time.zone.now %>
