@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    expose(:article, Article.find_by_params(params))
+    expose(:article, Article.publishable.find_by_params(params))
   end
 
   def multiple
@@ -19,5 +19,10 @@ class ArticlesController < ApplicationController
       set(:page, params[:page])
     end
     expose(:articles, Article.get_quantity(params[:quantity], params[:offset]))
+  end
+
+  def preview
+    set(:article, Preview.find_article_by_hash(params[:hash]))
+    render :show
   end
 end

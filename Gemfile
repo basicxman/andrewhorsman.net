@@ -7,6 +7,7 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'rdiscount'
 gem 'albino'
+gem 'uuid'
 
 group :test do
   gem 'turn'

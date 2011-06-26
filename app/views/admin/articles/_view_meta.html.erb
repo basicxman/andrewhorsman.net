@@ -9,8 +9,9 @@
       <th>Time to Commit</th>
       <th></th>
       <th></th>
-      <th>Staging</th>
-      <th>Data</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,7 @@
         <td><%= link_to "X", admin_article_path(article), :method => :delete, :title => "Delete #{article.title}", :confirm => "Are you sure?" %></td>
         <td><%= render "admin/articles/commit_publish", :locals => { :article_cur => @article_cur } %></td>
         <td><%= link_to "Data", admin_article_path(article, :format => :txt), :title => "Data", :target => "_blank" %></td>
+        <td><%= link_to "Show", preview(article), :title => "Show/Preview", :target => "_blank" %>
       </tr>
     <% end %>
   </tbody>

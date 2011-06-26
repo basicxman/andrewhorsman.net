@@ -25,6 +25,7 @@ Site::Application.routes.draw do
   match "articles/multiple/:quantity" => "articles#multiple", :as => :show_multiple_aritcles
   match "articles/multiple/:quantity/from/:offset" => "articles#multiple", :as => :show_multiple_articles_with_offset
   match "articles/page/:page" => "articles#multiple", :as => :articles_page
+  match "articles/preview/:hash" => "articles#preview", :as => :preview
   resources :articles, :only => [:index, :show]
 
   # Tags

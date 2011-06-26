@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  article_id: 1
+  hash_id: MyString
+
+two:
+  article_id: 1
+  hash_id: MyString

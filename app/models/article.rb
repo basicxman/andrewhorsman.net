@@ -3,6 +3,7 @@ class Article < ActiveRecord::Base
 
   has_many :taggings
   has_many :tags, :through => :taggings
+  has_one  :preview
 
   validates_presence_of :title, :author, :content
 
@@ -11,7 +12,8 @@ class Article < ActiveRecord::Base
   scope :updated_desc, lambda { order("updated_at DESC") }
   scope :frontpage,    lambda { publishable.latest_first }
 
-  before_save :process_content_for_html
+  before_save   :process_content_for_html
+  before_create :give_preview
 
   attr_accessor :file, :update_html
 
@@ -29,7 +31,7 @@ class Article < ActiveRecord::Base
   end
 
   def self.find_by_params(params)
-    publishable.find(params[:id].to_i)
+    find(params[:id].to_i)
   end
 
   def self.find_by_tags(tags)
@@ -102,4 +104,7 @@ class Article < ActiveRecord::Base
     self.content_html = ArticleProcessing.process_content(self.content) unless self.update_html.nil?
   end
 
+  def give_preview
+    self.preview = Preview.new(:hash_id => UUID.generate)
+  end
 end

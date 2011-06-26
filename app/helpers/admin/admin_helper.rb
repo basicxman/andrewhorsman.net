@@ -8,4 +8,13 @@ module Admin::AdminHelper
     time_ago_in_words(target_time)
   end
 
+  # Get the path to display an article.
+  def preview(article)
+    unless article.published_at.nil?
+      article_path(article)
+    else
+      preview_path(article.preview.hash_id)
+    end
+  end
+
 end
