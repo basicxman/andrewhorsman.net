@@ -15,6 +15,27 @@ class Article < ActiveRecord::Base
 
   attr_accessor :file, :update_html
 
+  def self.article_from_file(path)
+    content = File.read(path)
+    ArticleProcessing.process_input_file(content)
+  end
+
+  def self.available_pages
+    (Article.count.to_f / Site::Application.config.articles_in_page).ceil
+  end
+
+  def self.get_quantity(quantity = 1, offset = 0)
+    frontpage.offset(offset).limit(quantity)
+  end
+
+  def self.find_by_params(params)
+    publishable.find(params[:id].to_i)
+  end
+
+  def self.find_by_tags(tags)
+    publishable.find(:all, :include => :tags, :conditions => ["tags.keyword IN (?)", tags])
+  end
+
   def to_param
     "#{self.id}-#{self.title.parameterize}"
   end
@@ -79,27 +100,6 @@ class Article < ActiveRecord::Base
 
   def process_content_for_html
     self.content_html = ArticleProcessing.process_content(self.content) unless self.update_html.nil?
-  end
-
-  def self.article_from_file(path)
-    content = File.read(path)
-    ArticleProcessing.process_input_file(content)
-  end
-
-  def self.available_pages
-    (Article.count.to_f / Site::Application.config.articles_in_page).ceil
-  end
-
-  def self.get_quantity(quantity = 1, offset = 0)
-    frontpage.offset(offset).limit(quantity)
-  end
-
-  def self.find_by_params(params)
-    find(params[:id].to_i)
-  end
-
-  def self.find_by_tags(tags)
-    publishable.find(:all, :include => :tags, :conditions => ["tags.keyword IN (?)", tags])
   end
 
 end
