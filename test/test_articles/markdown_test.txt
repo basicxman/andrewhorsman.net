@@ -36,14 +36,15 @@ This is an H2
 <br />
 > ## Blockquotes with headers.
 >
+>
 > 1. List item.
-> 2. List item.
+> 2. List item deux.
 
-1. In speaking of list items...
-2. Let's try
-3. An ordered list!
-
-* Unordered list
+<br />
+* In speaking of list items...
+* Let's try
+* An ordered list!
+* Foo bar
 * Banana
 * Fruit
 * Oh hey a multiple paragraph list item.
@@ -52,4 +53,5 @@ This is an H2
 * Let's see how it works with a 
 * > blockquote!
 
+<br />
 Testing some odd paragraph.
