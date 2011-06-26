@@ -16,11 +16,7 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def create
-    if params[:article][:file]
-      @article = Article.new_article_from_file(params[:article][:file].tempfile)
-    else
-      @article = Article.new(params[:article])
-    end
+    @article = Article.new(get_article_params)
     redirect_or_render(admin_path, :new) do
       @article.update_html = true
       @article.save
@@ -31,7 +27,7 @@ class Admin::ArticlesController < ApplicationController
     @article = Article.find_by_params(params)
     redirect_or_render(admin_path, :edit) do
       @article.update_html = true
-      @article.update_attributes(params[:article])
+      @article.update_attributes(get_article_params)
     end
   end
 
@@ -56,6 +52,14 @@ class Admin::ArticlesController < ApplicationController
   end
 
   private
+
+  def get_article_params
+    if params[:article][:file]
+      Article.article_from_file(params[:article][:file].tempfile)
+    else
+      params[:article]
+    end
+  end
   
   def commit_notice(b)
     b ? "Committed!" : "Unable to commit at this time."

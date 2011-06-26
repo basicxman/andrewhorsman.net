@@ -1,0 +1,35 @@
+@title: Concrete Learning or Why Learn XYZ in 24 Hours Books Fail
+@author: Andrew Horsman
+@tags: learning reading the-little-schemer cal-newport scott-young
+
+I recently finished reading an (test!) <a href="http://calnewport.com/blog/2011/05/18/anatomy-of-an-a-a-look-inside-the-process-of-one-of-the-worlds-most-efficient-studiers/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+StudyHacks+%28Study+Hacks%29" target="_blank">article</a> by Cal Newport over at Study Hacks on <a href="http://www.scotthyoung.com/blog/" target="_blank">Scott Young's</a> study process.  While not revolutionary (and some might even make a bad joke about vegetarianism) his habits do bring some refreshing points.
+
+Two points stand out to me,
+
+> If you can’t explain something simply, it means you don’t fully understand it.
+
+<tooltip title="Keep It Simple Stupid">KISS</tooltip> is a principle held highly in engineering of all forms and is a principle I embrace wholeheartedly.  I think it would be difficult if not impossible to find an example that goes against this point.
+
+Of course sometimes the decision on whether something is simple or not is quite subjective but I think his point is still sound regardless.  Simplicity is a form of beauty, so while you may not think http://www.youtube.com/watch?v=-GgOn66knqA
+<note: remove this if I cannot provide a concrete point that relates back to the argument>
+
+> Ask, “Why?” to probe for patterns in the structure.
+
+If you've read <a href="http://mitpress.mit.edu/catalog/item/default.asp?ttype=2&tid=4825" target="_blank">The Little Schemer</a> then you'll know this book attempts a very unique style of technical writing.  The Little Schemer has very little traditional text.  Instead the book asks and provides a list of questions and answers covering a wide range of possible thinking towards the problem.  People I've talked to who have read this book find this a very effective way of understanding the text in front of them, and even beyond understaning but remembering the concepts.
+
+> Is (null? l) true or false
+> where
+>   l is (a b c)
+>
+> False,
+>   because l is a non-empty list.
+
+<br />
+> Is (atom? (cdr l)) true or false
+> where
+>   l is (Harry)
+>
+> False,
+>   because the list () is not an atom.
+
+In fact, in the books 210 pages the author thought this technique was so effective, that he only included "traditional style content" in the form of just over a dozen introductory sections.  It's hard to argue with the results given that The Little Schemer is read by both Stanford and MIT students additionally to receiving <a href="http://www.amazon.com/review/RMRQUQPH2J4GB/ref=cm_cr_dp_perm?ie=UTF8&ASIN=0262560992&nodeID=283155&tag=&linkCode=" target="_blank">positive reviews</a> from people such as Douglas Crockford.

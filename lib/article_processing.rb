@@ -41,7 +41,8 @@ class ArticleProcessing
 
     # Markdown blockquotes breaklines are annoying, add a blank ">\n" to every >
     def blockquote_fix(content)
-      content.gsub(/^>.*?\n/) { |m| "#{m}>\n" }
+      content.gsub!(/^>.*?\n/) { |m| "#{m}>\n" }
+      content.gsub /(>\r?\n){3}/, "><br /><br />\n"
     end
 
     # Translate <tooltip> tags into something that actually works in a browser.

@@ -148,14 +148,3 @@ $tooltip_rad: 5px;
     border-bottom-left-radius: $tooltip_rad;
   }
 }
-
-/* Quoting */
-blockquote {
-  margin: 10px 40px;
-  padding: 2px 20px;
-  border-left: 5px solid #aaa;
-
-  .tab {
-    margin-right: 10px;
-  }
-}

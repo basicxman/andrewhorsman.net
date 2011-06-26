@@ -1,8 +1,6 @@
 @import "styling.css.scss";
 @import "pygments_solarized.css.scss";
 
-.testing { color: #100; }
-
 /* Single article styling. */
 .article-single {
   .top-link {
@@ -215,4 +213,19 @@ table.highlighttable {
   }
 
   @include pygments_solarized;
+}
+
+/* Quoting */
+.article-content blockquote {
+  margin: 10px 40px;
+  padding: 6px 20px;
+  border-left: 5px solid #aaa;
+
+  p {
+    margin: 0px;
+  }
+
+  .tab {
+    margin-right: 10px;
+  }
 }

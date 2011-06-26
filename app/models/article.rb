@@ -81,9 +81,9 @@ class Article < ActiveRecord::Base
     self.content_html = ArticleProcessing.process_content(self.content) unless self.update_html.nil?
   end
 
-  def self.new_article_from_file(path)
+  def self.article_from_file(path)
     content = File.read(path)
-    Article.new(ArticleProcessing.process_input_file(content))
+    ArticleProcessing.process_input_file(content)
   end
 
   def self.available_pages
