@@ -16,4 +16,5 @@ group :test do
   gem 'guard-minitest', :git => 'git://github.com/guard/guard-minitest.git'
   gem 'ruby-prof'
   gem 'growl'
+  gem 'factory_girl_rails'
 end
