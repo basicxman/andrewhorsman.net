@@ -149,7 +149,7 @@ table.highlighttable {
   border-spacing: 0px;
 
   td.linenos {
-    background-color: lighten($base02, 10%);
+    background-color: #333;
     color: $base1;
     padding: 0px 8px;
     margin: 0px;
@@ -164,8 +164,8 @@ table.highlighttable {
   }
 
   td.code {
-    background-color: $base02;
-    color: $base1;
+    background-color: #fff;
+    color: #333;
     padding: 0px 8px;
     margin: 0px;
 
