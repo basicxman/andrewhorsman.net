@@ -1,13 +1,13 @@
 require 'test_helper'
 
 class ArticlesControllerTest < ActionController::TestCase
-	def setup
-		@articles ||= 21.times.to_a.inject([]) { |a| a << Factory(:article) }
-	end
+  def setup
+    @articles ||= 21.times.to_a.inject([]) { |a| a << Factory(:article) }
+  end
 
-	def teardown
-		@articles.each { |a| a.destroy }
-	end
+  def teardown
+    @articles.each { |a| a.destroy }
+  end
 
   test "should get the articles index and display x number of articles" do
     get :index
@@ -24,7 +24,7 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should not display articles which aren't yet published" do
-		Factory(:article, :title => "Generic test article", :published_at => nil)
+    Factory(:article, :title => "Generic test article", :published_at => nil)
     get :index
     assert_select ".article-title", :text => "Generic test article", :count => 0
   end
@@ -67,10 +67,10 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should display all tags in an article" do
-		article = Factory(:article)
-		article.tags << Factory(:tag, :keyword => "foo")
-		article.tags << Factory(:tag, :keyword => "bar")
-		article.tags << Factory(:tag, :keyword => "test")
+    article = Factory(:article)
+    article.tags << Factory(:tag, :keyword => "foo")
+    article.tags << Factory(:tag, :keyword => "bar")
+    article.tags << Factory(:tag, :keyword => "test")
     get :show, :id => article.id
     assert_select ".article-tags ul li", :count => 3
     assert_select ".article-tags ul li", :text => "foo"
@@ -79,12 +79,12 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should display updated date if after published date" do
-		a = Factory(:article, :published_at => Time.zone.now, :updated_at => Time.zone.now + 1.hours)
+    a = Factory(:article, :published_at => Time.zone.now, :updated_at => Time.zone.now + 1.hours)
     get :show, :id => a.id
     assert_select ".article-date", :count => 1
     assert_select ".article-updated-date", :count => 1
 
-		b = Factory(:article, :published_at => Time.zone.now, :updated_at => Time.zone.now - 1.hours)
+    b = Factory(:article, :published_at => Time.zone.now, :updated_at => Time.zone.now - 1.hours)
     get :show, :id => b.id
     assert_select ".article-date", :count => 1
     assert_select ".article-updated-date", :count => 0
@@ -111,8 +111,8 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should hide excess tags when viewing multiple articles" do
-		a = Factory.create(:article, :published_at => Time.zone.now + 10.days)
-		5.times { a.tags << Factory(:tag) }
+    a = Factory.create(:article, :published_at => Time.zone.now + 10.days)
+    5.times { a.tags << Factory(:tag) }
     get :multiple, :quantity => 1
     assert_select ".tag0", :count => 1
     assert_select ".tag1", :count => 1
