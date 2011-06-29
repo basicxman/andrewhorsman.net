@@ -1,19 +1,15 @@
 require 'test_helper'
 
 class UserControllerTest < ActionController::TestCase
-  def setup
-    # Can't place passwords in fixtures using has_secure_password
-    u = User.find(1)
-    u.password = "test"
-    u.save
 
-    u = User.find(2)
-    u.password = "testing"
-    u.save
+  @@a, @@b = add_users
+
+  def after_tests
+    delete_users
   end
 
   test "should redirect to homepage if already logged in" do
-    session[:user_id] = 1
+    session[:user_id] = @@a.id
 
     get :login_form
     assert_redirected_to root_path
@@ -29,7 +25,7 @@ class UserControllerTest < ActionController::TestCase
   test "should successfully login if proper credentials are given" do
     post :login, :email => "self@andrewhorsman.net", :password => "testing"
     assert_redirected_to root_path
-    assert_equal session[:user_id], 2
+    assert_equal session[:user_id], @@a.id
     assert_equal flash[:notice], "Logged in as self@andrewhorsman.net.  Hi Andrew Horsman!"
   end
 
@@ -42,7 +38,7 @@ class UserControllerTest < ActionController::TestCase
   end
 
   test "should logout successfully" do
-    session[:user_id] = 1
+    session[:user_id] = @@a.id
     get :logout
     assert_redirected_to root_path
     assert_equal flash[:notice], "Logged out."

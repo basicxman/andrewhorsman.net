@@ -1,9 +1,14 @@
-guard 'minitest' do
-  # App components
-  watch(%r|^app/controllers/(.*)\.rb|) { |m| "test/functional/#{m[1]}_test.rb" }
-  watch(%r|^app/models/(.*)\.rb|)      { |m| "test/unit/#{m[1]}_test.rb" }
+guard 'rspec', :version => 2 do
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb')  { "spec" }
 
-  # Tests
-  watch(%r|^test/(.*)/(.*)_test\.rb|) { |m| "test/#{m[1]}/#{m[2]}_test.rb" }
-  watch(%r|^test/test_helper\.rb|)    { "test" }
+  # Rails example
+  watch('spec/spec_helper.rb') { "spec" }
+  watch('config/routes.rb')    { "spec/routing" }
+  watch('app/controllers/application_controller.rb') { "spec/controllers" }
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
+  watch(%r{^lib/(.+)\.rb$})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| ["spec/routing/#{m[1]}_routing_spec.rb", "spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb", "spec/acceptance/#{m[1]}_spec.rb"] }
 end

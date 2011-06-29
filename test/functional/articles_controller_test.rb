@@ -1,12 +1,10 @@
 require 'test_helper'
 
 class ArticlesControllerTest < ActionController::TestCase
-  def setup
-    @articles ||= 21.times.to_a.inject([]) { |a| a << Factory(:article) }
-  end
+  @@articles = add_articles
 
-  def teardown
-    @articles.each { |a| a.destroy }
+  def after_tests
+    delete_articles
   end
 
   test "should get the articles index and display x number of articles" do
@@ -18,8 +16,8 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should display most recently updated articles first" do
     get :index
     assert_select ".article-title" do |elements|
-      assert_select elements[0], "a", :text => @articles[-1].title
-      assert_select elements[1], "a", :text => @articles[-2].title
+      assert_select elements[0], "a", :text => @@articles[-1].title
+      assert_select elements[1], "a", :text => @@articles[-2].title
     end
   end
 
@@ -47,17 +45,17 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should display an article" do
-    get :show, :id => @articles.first.id
-    assert_select ".article-title h2", :text => @articles.first.title
-    assert_select ".article-author", :text => "by #{@articles.first.author}"
+    get :show, :id => @@articles.first.id
+    assert_select ".article-title h2", :text => @@articles.first.title
+    assert_select ".article-author", :text => "by #{@@articles.first.author}"
   end
 
   test "should properly display next and previous article links" do
-    get :show, :id => @articles[0].id
+    get :show, :id => Article.first.id
     assert_select ".prev-article-link", :count => 0
     assert_select ".next-article-link", :count => 1
 
-    get :show, :id => @articles[1].id
+    get :show, :id => @@articles[1].id
     assert_select ".prev-article-link", :count => 1
     assert_select ".next-article-link", :count => 1
 
@@ -94,18 +92,21 @@ class ArticlesControllerTest < ActionController::TestCase
     get :multiple, :quantity => 5
     assert_select ".article-title", :count => 5
     assert_select ".article-title" do |elements|
-      assert_select elements[0], "h2", :text => @articles.last.title
+      assert_select elements[0], "h2", :text => @@articles.last.title
     end
   end
 
   test "should show multiple articles with offset" do
     get :multiple, :quantity => 5, :offset => 1
     assert_select ".article-title", :count => 5
+    assert_select ".article-title" do |elements|
+      assert_select elements[0], "h2", :text => @@articles[-2].title
+    end
   end
 
   test "should display titles and taglines properly" do
-    get :show, :id => @articles.first.id
-    assert_select "title", "#{@articles.first.title} | #{get_config(:main_title)}"
+    get :show, :id => @@articles.first.id
+    assert_select "title", "#{@@articles.first.title} | #{get_config(:main_title)}"
     assert_select "#header h1", :text => get_config(:main_title)
     assert_select "#header p", :text => get_config(:main_tagline)
   end
