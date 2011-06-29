@@ -8,7 +8,7 @@ class Article < ActiveRecord::Base
   validates_presence_of :title, :author, :content
 
   scope :publishable,  lambda { where("published_at IS NOT NULL") }
-  scope :latest_first, lambda { order("created_at DESC") }
+  scope :latest_first, lambda { order("published_at DESC") }
   scope :updated_desc, lambda { order("updated_at DESC") }
   scope :frontpage,    lambda { publishable.latest_first }
 

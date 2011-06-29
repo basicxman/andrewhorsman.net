@@ -2,64 +2,70 @@ require 'test_helper'
 
 class Admin::ArticlesControllerTest < ActionController::TestCase
   def setup
-    session[:user_id] = 2
+    login_as_admin
+    @article = Factory(:article)
   end
 
   test "should commit an article that was last commited over six hours ago" do
-    get :commit, :id => 3
-    assert_redirected_to admin_path
-    assert_equal "Committed!", flash[:notice]
-    assert_equal articles(:four).stage + 1, Article.find(3).stage
+    a = Factory(:article, :last_commit_date => Time.zone.now - 7.hours)
+    assert_difference("Article.find(a.id).stage", 1) do
+      get :commit, :id => a.id
+      assert_redirected_to admin_path
+      assert_equal "Committed!", flash[:notice]
+    end
   end
 
   test "should not commit an article which was just committed" do
-    get :commit, :id => 4
-    assert_redirected_to admin_path
-    assert_equal "Unable to commit at this time.", flash[:notice]
-    assert_equal articles(:four).stage, Article.find(4).stage
+    assert_no_difference("Article.find(@article.id).stage") do
+      get :commit, :id => @article.id
+      assert_redirected_to admin_path
+      assert_equal "Unable to commit at this time.", flash[:notice]
+    end
   end
 
   test "should publish an article if it has reached the final stage" do
-    get :publish, :id => 2
+    @article.update_attributes(:published_at => nil)
+    get :publish, :id => @article.id
     assert_redirected_to admin_path
     assert_equal "Published!", flash[:notice]
-    assert_not_nil Article.find(2).published_at
+    assert_not_nil Article.find(@article.id).published_at
   end
 
   test "should not publish an article which has not reached the final stage" do
-    get :publish, :id => 3
+    @article.update_attributes(:stage => 2, :published_at => nil)
+    get :publish, :id => @article.id
     assert_redirected_to admin_path
     assert_equal "Unable to publish at this time.", flash[:notice]
-    assert_nil Article.find(2).published_at
+    assert_nil Article.find(@article.id).published_at
   end
 
   test "should unpublish an article" do
-    get :unpublish, :id => 5
+    get :unpublish, :id => @article.id
     assert_redirected_to admin_path
     assert_equal "Unpublished.", flash[:notice]
-    assert_nil Article.find(5).published_at
+    assert_nil Article.find(@article.id).published_at
   end
 
   test "should destroy an article" do
-    delete :destroy, :id => 5
+    delete :destroy, :id => @article.id
     assert_redirected_to admin_path
     assert_raise(ActiveRecord::RecordNotFound) do
-      Article.find(5)
+      Article.find(@article.id)
     end
   end
 
   test "should update an article" do
-    put :update, :id => 2, :article => { :title => "Testing!" }
+    put :update, :id => @article.id, :article => { :title => "Testing!" }
     assert_redirected_to admin_path
-    assert_equal "Testing!", Article.find(2).title
+    assert_equal "Testing!", Article.find(@article.id).title
   end
 
   test "should update tags" do
-    put :update, :id => 8, :article => { :tag_list => "foo bar" }
+    put :update, :id => @article.id, :article => { :tag_list => "foo bar" }
     assert_redirected_to admin_path
-    assert Article.find(8).tags.exists? Tag.find_by_keyword("foo")
-    assert Article.find(8).tags.exists? Tag.find_by_keyword("bar")
-    assert_equal 2, Article.find(8).tags.count
+    assert Article.find(@article.id).tags.exists? Tag.find_by_keyword("foo")
+    assert Article.find(@article.id).tags.exists? Tag.find_by_keyword("bar")
+    assert_equal 2, Article.find(@article.id).tags.count
   end
 
   # Routes

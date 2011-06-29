@@ -1,14 +1,6 @@
 require 'test_helper'
 
 class Admin::AdminControllerTest < ActionController::TestCase
-  def login_as_admin
-    session[:user_id] = 2
-  end
-
-  def login_as_user
-    session[:user_id] = 1
-  end
-
   test "should display new article link on console" do
     login_as_admin
     get :index
