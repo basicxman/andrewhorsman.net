@@ -5,7 +5,7 @@ gem 'sqlite3'
 gem 'sass'
 gem 'uglifier'
 gem 'jquery-rails'
-gem 'rdiscount'
+gem 'redcarpet'
 gem 'albino'
 gem 'uuid'
 
