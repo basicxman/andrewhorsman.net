@@ -26,12 +26,13 @@ module ApplicationHelper
 
   # Smarter content snipping.
   def snip_content(content)
+    c = content.gsub(/\<div class="syntax"\>.*?\<\/table\>\<\/div\>/m, "") # Remove large syntax highlighted regions.
     l = get_config(:short_content_length)
-    return content if content.length <= l
+    return c if c.length <= l
 
-    i = l + content[l..-1].index(/[!\?\.;,\s%]|$/)
+    i = l + c[l..-1].index(/[!\?\.;,\s%]|$/)
     i = l if i.nil? or i - 15 > l
-    content[0...i] + "..."
+    c[0...i] + "..."
   end
 
 end
