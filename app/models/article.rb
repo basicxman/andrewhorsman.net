@@ -1,7 +1,7 @@
 class Article < ActiveRecord::Base
   include ArticlesHelper
 
-  has_many :taggings
+  has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
   has_one  :preview
 
