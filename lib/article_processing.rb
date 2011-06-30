@@ -16,6 +16,8 @@ class << ArticleProcessing
       index += 1
     end
 
+    return { :content => data.strip } if header == data
+
     title   = header_var(header, "title")
     author  = header_var(header, "author")
     tags    = header_var(header, "tags")
@@ -83,9 +85,9 @@ class ComplexProcessor
     code[0...6] = '' if code[0...6] == '<code>'
     code[-7, 7] = '' if code[-7, 7] == '</code>'
     code.split("\n").each_with_index do |line, index|
-      line_numbers << index + 1 if line =~ /\*{3}(\r|\n|$)/
+      line_numbers << index + 1 if line =~ /\*{3}(\r?\n|$)/
     end
 
-    { :code => code.gsub(/\s*\*{3}(\r?\n|$)/, "\n"), :lines => line_numbers.join(",") }
+    { :code => code.gsub(/\s*\*{3}(\r?\n|$)/, "\n"), :lines => line_numbers.join(" ") }
   end
 end
