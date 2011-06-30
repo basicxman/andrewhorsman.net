@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'redcarpet'
 gem 'albino'
 gem 'uuid'
+gem 'nokogiri'
 
 group :test do
   gem 'turn'
