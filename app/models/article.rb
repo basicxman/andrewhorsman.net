@@ -7,10 +7,10 @@ class Article < ActiveRecord::Base
 
   validates_presence_of :title, :author, :content
 
-  scope :publishable,  lambda { where("published_at IS NOT NULL") }
-  scope :latest_first, lambda { order("published_at DESC") }
-  scope :updated_desc, lambda { order("updated_at DESC") }
-  scope :frontpage,    lambda { publishable.latest_first }
+  scope :publishable,  where("published_at IS NOT NULL")
+  scope :latest_first, order("published_at DESC")
+  scope :updated_desc, order("updated_at DESC")
+  scope :frontpage,    publishable.latest_first
 
   before_save   :process_content_for_html
   before_create :give_preview
@@ -93,11 +93,11 @@ class Article < ActiveRecord::Base
 
   def publish
     return false unless can_be_published?
-    self.update_attributes :published_at => Time.zone.now
+    self.update_attribute :published_at, Time.zone.now
   end
 
   def unpublish
-    self.update_attributes :published_at => nil
+    self.update_attribute :published_at, nil
   end
 
   def process_content_for_html

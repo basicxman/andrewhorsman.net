@@ -8,13 +8,15 @@ class ActiveSupport::TestCase
   end
 
   def login_as_admin
-    user = Factory(:admin)
-    session[:user_id] = user.id
-    user.id
+    login(:admin)
   end
 
   def login_as_user
-    user = Factory(:user)
+    login(:user)
+  end
+
+  def login(factory_symbol)
+    user = Factory(factory_symbol)
     session[:user_id] = user.id
     user.id
   end

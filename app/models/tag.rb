@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
   validates_presence_of   :keyword
   validates_format_of     :keyword, :with => /^[0-9a-zA-Z\-\?!]+$/
 
-  scope :latest_first, lambda { order("created_at DESC") }
+  scope :latest_first, order("created_at DESC")
   scope :frontpage,    lambda { latest_first.all }
 
   def to_param

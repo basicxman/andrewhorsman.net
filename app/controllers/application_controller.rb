@@ -26,30 +26,28 @@ class ApplicationController < ActionController::Base
   def user
     @user = User.find(session[:user_id]) if session[:user_id]
   end
-  helper_method :user # Available in views too!
+  helper_method :user
 
   def authenticate_admin
     if user.nil? or !user.is_admin
-      set_redirect
-      redirect_to login_form_path, :notice => "Need to be an admin to see this page!"
+      redirect_to login_form_path(:landing_page => request.fullpath), :notice => "Need to be an admin to see this page!"
     end
   end
 
   def authenticate_user
     if user.nil?
-      set_redirect
-      redirect_to login_form_path, :notice => "Need to be logged in to see this page!"
+      redirect_to login_form_path(:landing_page => request.fullpath), :notice => "Need to be logged in to see this page!"
     end
   end
 
-  def set_redirect
-    session[:redirect_to] = request.fullpath
+  def get_redirect
+    validate_landing(params[:landing_page]) || root_path
   end
 
-  def get_redirect
-    r = session[:redirect_to] || root_path
-    session[:redirect_to] = nil
-    r
+  def validate_landing(url)
+    return nil if url.nil?
+    return nil unless url[0] == "/" && url.index(/^\/\//).nil?
+    return url
   end
 
   # Sidebar

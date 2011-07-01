@@ -29,13 +29,13 @@ class Admin::AdminControllerTest < ActionController::TestCase
 
   test "should redirect to login form if logged out" do
     get :index
-    assert_redirected_to login_form_path
+    assert_redirected_to login_form_path(:landing_page => "/admin")
   end
 
   test "should redirect to login form if a regular user" do
     login_as_user
     get :index
-    assert_redirected_to login_form_path
+    assert_redirected_to login_form_path(:landing_page => "/admin")
   end
 
   # Routes
