@@ -20,6 +20,20 @@ class Admin::AdminControllerTest < ActionController::TestCase
     assert_select "#full-content table#articles-console tbody tr", :count => Article.count
   end
 
+  test "should display a valid show link for a published article" do
+    login_as_admin
+    article = Factory(:article)
+    get :index
+    assert_select "a[href=#{article_path(article)}]"
+  end
+
+  test "should display a valid show link for an unpublished article" do
+    login_as_admin
+    article = Factory(:article, :published_at => nil)
+    get :index
+    assert_select "a[href=#{preview_path(article.hash)}]"
+  end
+
   test "should display reading items table on console" do
     login_as_admin
     get :index

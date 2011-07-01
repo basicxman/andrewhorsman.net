@@ -127,6 +127,20 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_select ".hidden-tag", :count => 1
   end
 
+  test "should not be able to see an unpublished article" do
+    article = Factory(:article, :published_at => nil)
+    assert_raise(ActiveRecord::RecordNotFound) do
+      get :show, :id => article.id
+    end
+  end
+
+  test "should get an article via a preview" do
+    article = Factory(:article)
+    get :preview, :hash => article.hash
+    assert_response :success
+    assert_select ".article-title", article.title
+  end
+
   # Routes
   test "should route to articles index" do
     assert_routing "/articles", { :controller => "articles", :action => "index" }

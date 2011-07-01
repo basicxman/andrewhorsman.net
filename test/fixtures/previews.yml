@@ -1,5 +1,0 @@
-<% 1.upto(24) do |n| %>
-preview-<%= n %>:
-  article_id: <%= n %>
-  hash_id: <%= n %>
-<% end %>

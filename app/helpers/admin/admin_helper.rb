@@ -13,7 +13,7 @@ module Admin::AdminHelper
     unless article.published_at.nil?
       article_path(article)
     else
-      preview_path(article.preview.hash_id)
+      preview_path(article.hash)
     end
   end
 

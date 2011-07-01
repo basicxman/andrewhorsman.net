@@ -105,6 +105,6 @@ class Article < ActiveRecord::Base
   end
 
   def give_preview
-    self.preview = Preview.new(:hash_id => UUID.generate)
+    self.hash = UUID.generate
   end
 end

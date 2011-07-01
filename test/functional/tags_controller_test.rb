@@ -9,7 +9,7 @@ class TagsControllerTest < ActionController::TestCase
 
   test "should get the articles for tag foo" do
     tag = Factory(:tag)
-    tag.articles += [Factory(:article, :title => "Article with tags"), Factory(:article, :title => "Article with long tags")]
+    tag.articles << Factory(:article, :title => "Article with tags") << Factory(:article, :title => "Article with long tags")
     get :show, :id => tag.id
     assert_select ".article-title", :count => 2
     assert_select ".article-title h2", :text => "Article with tags"
