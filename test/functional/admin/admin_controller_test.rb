@@ -31,7 +31,7 @@ class Admin::AdminControllerTest < ActionController::TestCase
     login_as_admin
     article = Factory(:article, :published_at => nil)
     get :index
-    assert_select "a[href=#{preview_path(article.hash)}]"
+    assert_select "a[href=#{preview_path(article.preview_hash)}]"
   end
 
   test "should display reading items table on console" do

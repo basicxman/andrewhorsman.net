@@ -136,7 +136,7 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test "should get an article via a preview" do
     article = Factory(:article)
-    get :preview, :hash => article.hash
+    get :preview, :hash => article.preview_hash
     assert_response :success
     assert_select ".article-title", article.title
   end

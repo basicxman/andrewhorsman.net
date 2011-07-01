@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
   end
 
   def preview
-    set(:article, Article.find_by_hash(params[:hash]))
+    set(:article, Article.find_by_preview_hash(params[:hash]))
     render :show
   end
 end

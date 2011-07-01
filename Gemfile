@@ -19,3 +19,7 @@ group :test do
   gem 'growl'
   gem 'factory_girl_rails'
 end
+
+group :development do
+  gem 'ruby-debug19'
+end
