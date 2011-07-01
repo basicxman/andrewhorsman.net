@@ -3,7 +3,6 @@ class Article < ActiveRecord::Base
 
   has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
-  has_one  :preview
 
   validates_presence_of :title, :author, :content
 
