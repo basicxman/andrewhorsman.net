@@ -46,10 +46,10 @@ class Admin::AdminControllerTest < ActionController::TestCase
     assert_redirected_to login_form_path(:landing_page => "/admin")
   end
 
-  test "should redirect to login form if a regular user" do
+  test "should redirect to homepage if a regular user" do
     login_as_user
     get :index
-    assert_redirected_to login_form_path(:landing_page => "/admin")
+    assert_redirected_to root_path
   end
 
   # Routes

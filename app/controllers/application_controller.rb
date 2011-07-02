@@ -24,13 +24,15 @@ class ApplicationController < ActionController::Base
 
   # User authentication
   def user
-    @user = User.find(session[:user_id]) if session[:user_id]
+    @user ||= User.find(session[:user_id]) if session[:user_id]
   end
   helper_method :user
 
   def authenticate_admin
-    if user.nil? or !user.is_admin
-      redirect_to login_form_path(:landing_page => request.fullpath), :notice => "Need to be an admin to see this page!"
+    if user.nil?
+      redirect_to login_form_path(:landing_page => request.fullpath), :notice => "Need to be logged in as an administrator to see this page!"
+    elsif !user.is_admin
+      redirect_to root_path, :notice => "Need to be an admin to see this page!"
     end
   end
 
