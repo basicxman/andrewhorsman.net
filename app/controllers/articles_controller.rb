@@ -12,18 +12,22 @@ class ArticlesController < ApplicationController
     expose(:article, Article.publishable.find_by_params(params))
   end
 
+  def search
+    page = params[:page].to_i || 0
+
+    serp = Article.sphinx_search(params[:query], { :page => page + 1 })
+    set(:available_pages, serp.total_pages)
+    set(:page, page)
+    expose(:articles, serp)
+  end
+
   def multiple
     if params[:page]
       params[:quantity] = get_config(:articles_in_page)
       params[:offset]   = get_config(:articles_in_page) * params[:page].to_i
       set(:page, params[:page])
     end
-
-    if params[:search]
-      expose(:articles, Article.sphinx_search(params[:search]))
-    else
-      expose(:articles, Article.get_quantity(params[:quantity], params[:offset]))
-    end
+    expose(:articles, Article.get_quantity(params[:quantity], params[:offset]))
   end
 
   def preview

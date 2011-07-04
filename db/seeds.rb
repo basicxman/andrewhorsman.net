@@ -14,29 +14,23 @@ def add_tags(*list)
 end
 #--------------------------------------
 
+User.create(:email => "self@andrewhorsman.net", :name => "Andrew Horsman", :password => "testing")
+User.create(:email => "test@andrewhorsman.net", :name => "John Smith",     :password => "testing")
 
 article do
   {
-    :title => "Testing",
-    :content => "Testing a new page."
+    :title => "Unique article",
+    :content => "Entirely unique content."
   }
 end
-add_tags "foo", "bar"
 
-30.times do |n|
+35.times do |n|
   article do
     {
-      :title => "Article #{n} in series",
-      :content => "This is part of a series (except not really of course) zomg!"
+      :title => "Some common article",
+      :content => "Common content in article ##{n}",
+      :published_at => Time.zone.now + n.hours,
+      :updated_at => Time.zone.now + n.hours
     }
   end
-  add_tags "foo", "series"
 end
-
-article do
-  {
-    :title => "Long form article",
-    :content => File.read(File.join(Dir.pwd, "doc/lipsum.txt"))
-  }
-end
-add_tags "foo", "some-very-very-very-very-long-tag"

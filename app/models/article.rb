@@ -41,6 +41,8 @@ class Article < ActiveRecord::Base
     opts.merge!({
       :without => { :published_at => "NULL" },
       :order => :updated_at,
+      :sort_mode => :desc,
+      :per_page => get_config(:articles_in_page),
       :field_weights => { :title => 20, :content => 10, :author_name => 10, :tag_keywords => 10 }
     })
     Article.search(query, opts)

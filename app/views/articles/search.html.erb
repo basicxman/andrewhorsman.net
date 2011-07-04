@@ -1,0 +1,2 @@
+<%= construct_title("Searching for #{@query}") %>
+<%= render "articles/multi", :locals => { :articles => @articles, :available_pages => @available_pages, :query => @query } %>
