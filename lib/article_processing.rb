@@ -47,25 +47,25 @@ end
 # Abstract Nokogiri related processing.
 class ComplexProcessor
   def initialize(content)
-    @doc = Nokogiri::HTML(content)
+    @doc = Nokogiri::HTML::DocumentFragment.parse(content)
   end
 
   # Return content for further processing.
   def content
-    @doc.css("body").inner_html
+    @doc.inner_html
   end
 
   # Add syntax highlighting.
   def highlight!
-    @doc.search("//pre[@lang]").each do |pre|
-      pre.replace "<div class='syntax'>" + pygmentize(pre.text.rstrip, pre[:lang]) + "</div>"
+    @doc.css("pre[@lang]").each do |pre|
+      pre.replace "<div class='syntax'>" + pygmentize(pre.text.rstrip, pre.attr("lang")) + "</div>"
     end
   end
 
   # Translate <tooltip> tags into something that actually works in a browser.
   def tooltips!
-    @doc.search("//tooltip[@title]").each do |tip|
-      tip.replace "<span class='tooltip'><span class='tooltip-regular'>#{tip.text.rstrip}</span><span class='tooltip-full'>#{tip[:title]}</span></span>"
+    @doc.css("tooltip").each do |tip|
+      tip.replace "<span class='tooltip'><span class='tooltip-regular'>#{tip.text.rstrip}</span><span class='tooltip-full'>#{tip.attr("title")}</span></span>"
     end
   end
 
