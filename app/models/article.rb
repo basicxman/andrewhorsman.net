@@ -37,6 +37,15 @@ class Article < ActiveRecord::Base
     publishable.find(:all, :include => :tags, :conditions => ["tags.keyword IN (?)", tags])
   end
 
+  def self.sphinx_search(query, opts = {})
+    opts.merge!({
+      :without => { :published_at => "NULL" },
+      :order => :updated_at,
+      :field_weights => { :title => 20, :content => 10, :author_name => 10, :tag_keywords => 10 }
+    })
+    Article.search(query, opts)
+  end
+
   def to_param
     "#{self.id}-#{self.title.parameterize}"
   end
@@ -115,5 +124,6 @@ class Article < ActiveRecord::Base
     indexes tags(:keyword), :as => :tag_keywords
 
     has published_at
+    has updated_at
   end
 end

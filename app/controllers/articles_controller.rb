@@ -18,7 +18,12 @@ class ArticlesController < ApplicationController
       params[:offset]   = get_config(:articles_in_page) * params[:page].to_i
       set(:page, params[:page])
     end
-    expose(:articles, Article.get_quantity(params[:quantity], params[:offset]))
+
+    if params[:search]
+      expose(:articles, Article.sphinx_search(params[:search]))
+    else
+      expose(:articles, Article.get_quantity(params[:quantity], params[:offset]))
+    end
   end
 
   def preview
