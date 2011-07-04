@@ -106,4 +106,14 @@ class Article < ActiveRecord::Base
   def give_preview
     self.preview_hash = UUID.generate
   end
+
+  # Thinking Sphinx
+  define_index do
+    indexes title, :sortable => true
+    indexes content
+    indexes author
+    indexes tags(:keyword), :as => :tag_keywords
+
+    has published_at
+  end
 end

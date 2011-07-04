@@ -4,7 +4,9 @@
 *DS_Store
 *.gitkeep
 *.lock
-db/*.sqlite3
+db/sphinx
 log/*.log
+log/*.pid
+config/*.sphinx.conf
 tmp/
 files/

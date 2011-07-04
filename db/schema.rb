@@ -25,13 +25,6 @@ ActiveRecord::Schema.define(:version => 20110701182530) do
     t.string   "preview_hash"
   end
 
-  create_table "previews", :force => true do |t|
-    t.integer  "article_id"
-    t.string   "hash_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "reading_items", :force => true do |t|
     t.string   "link"
     t.string   "name"
