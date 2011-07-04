@@ -9,7 +9,7 @@ end
 
 def add_tags(*list)
   list.each do |t|
-    $a.tags << Tag.find_or_create(t)
+    $a.tags << Tag.find_or_create_by_keyword(t)
   end
 end
 #--------------------------------------

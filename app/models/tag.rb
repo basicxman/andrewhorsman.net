@@ -26,10 +26,6 @@ class Tag < ActiveRecord::Base
   end
 
   def self.find_by_keywords(keywords)
-    keywords.map { |k| Tag.find_or_create(k) }
-  end
-
-  def self.find_or_create(keyword)
-    Tag.find_by_keyword(keyword) || Tag.create(:keyword => keyword)
+    keywords.map { |k| Tag.find_or_create_by_keyword(k) }
   end
 end

@@ -69,7 +69,7 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test "should display all tags in an article" do
     article = Factory(:article)
-    article.tags += [Tag.find_or_create("foo"), Tag.find_or_create("bar"), Tag.find_or_create("test")]
+    article.tags += Tag.find_by_keywords(["foo", "bar", "test"])
     get :show, :id => article.id
     assert_select ".article-tags ul li", :count => 3
     assert_select ".article-tags ul li", :text => "foo"

@@ -6,7 +6,6 @@ Factory.define :article do |f|
   f.content "Lipsum"
   f.stage   3
   f.last_commit_date Time.zone.now
-  f.update_html true
 end
 
 Factory.define :tag do |f|

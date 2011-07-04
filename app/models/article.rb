@@ -11,10 +11,10 @@ class Article < ActiveRecord::Base
   scope :updated_desc, order("updated_at DESC")
   scope :frontpage,    publishable.latest_first
 
-  before_save   :process_content_for_html
+  before_save   :process_content_for_html, :if => :content_changed?
   before_create :give_preview
 
-  attr_accessor :file, :update_html
+  attr_accessor :file
 
   def self.article_from_file(path)
     content = File.read(path)
@@ -109,7 +109,7 @@ class Article < ActiveRecord::Base
   end
 
   def process_content_for_html
-    self.content_html = ArticleProcessing.process_content(self.content) unless self.update_html.nil?
+    self.content_html = ArticleProcessing.process_content(self.content)
   end
 
   def give_preview
