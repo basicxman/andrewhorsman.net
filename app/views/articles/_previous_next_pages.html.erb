@@ -2,11 +2,11 @@
   <% page = @page.to_i %>
   <span class="page_links">
     <% if page > 0 %>
-      <%= link_to "Previous Page", search_path(@query, :page => page - 1), :title => "Previous Page" %>
+      <%= link_to "Previous Page", np_page_path(page - 1, @query), :title => "Previous Page" %>
     <% end %>
 
-    <% if page < (@available_pages - 1 || Article.available_pages - 1) %>
-      <%= link_to "Next Page", search_path(@query, :page => page + 1), :title => "Next Page" %>
+    <% if page < (@available_pages || Article.available_pages) - 1 %>
+      <%= link_to "Next Page", np_page_path(page + 1, @query), :title => "Next Page" %>
     <% end %>
   </span>
 <% end %>
