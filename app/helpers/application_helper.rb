@@ -35,4 +35,9 @@ module ApplicationHelper
     c[0...i] + "..."
   end
 
+  # Social buttons.
+  def social_image(network)
+    image_tag(asset_path("social/#{network}_button.png"), :alt => "Share on #{network.capitalize}")
+  end
+
 end

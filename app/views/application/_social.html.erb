@@ -1,0 +1,19 @@
+<div class="social-content">
+  <p>You should share this article!</p>
+
+  <div class="twitter">
+    <a href="http://twitter.com/share" title="Share on Twitter!" target="_blank"><%= social_image("twitter") %></a>
+  </div>
+
+  <div class="google-plus">
+  </div>
+
+  <div class="linkedin">
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=<%= request.url %>" title="Share on LinkedIn" target="_blank"><%= social_image("linkedin") %></a>
+  </div>
+
+  <div class="reddit">
+    <a href="http://reddit.com/submit?url=<%= request.url %>" target="_blank" title="Share on Reddit" target="_blank"><%= social_image("reddit") %></a>
+  </div>
+</div>
+<div style="clear: both;"></div>

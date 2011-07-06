@@ -148,3 +148,18 @@ $tooltip_rad: 5px;
     border-bottom-left-radius: $tooltip_rad;
   }
 }
+
+/* Social */
+.social-content {
+  div {
+    float: left;
+    margin: 10px 10px 10px 0px;
+    a {
+      color: $primary_fg_colour;
+    }
+  }
+
+  .google-plus {
+    padding-top: 1px;
+  }
+}
