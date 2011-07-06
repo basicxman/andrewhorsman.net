@@ -7,11 +7,11 @@
       <th>Author</th>
       <th>#</th>
       <th>Time to Commit</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th></th><!-- Edit -->
+      <th class="icon-header"></th><!-- Delete -->
+      <th></th><!-- Publish/Unpublish/Commit -->
+      <th></th><!-- Data -->
+      <th></th><!-- Preview/Show -->
     </tr>
   </thead>
   <tbody>
@@ -28,7 +28,7 @@
         <td><%= article.stage %></td>
         <td><%= time_required(article.last_commit_date) %></td>
         <td><%= link_to "E", edit_admin_article_path(article), :title => "Edit/Show #{article.title}" %></td>
-        <td><%= link_to "X", admin_article_path(article), :method => :delete, :title => "Delete #{article.title}", :confirm => "Are you sure?" %></td>
+        <td><%= link_to image_tag(asset_path("misc/circular_delete.png"), :alt => "Delete Article"), admin_article_path(article), :method => :delete, :title => "Delete #{article.title}", :confirm => "Are you sure?" %></td>
         <td><%= render "admin/articles/commit_publish", :locals => { :article_cur => @article_cur } %></td>
         <td><%= link_to "Data", admin_article_path(article, :format => :txt), :title => "Data", :target => "_blank" %></td>
         <td><%= link_to "Show", preview(article), :title => "Show/Preview", :target => "_blank" %></td>

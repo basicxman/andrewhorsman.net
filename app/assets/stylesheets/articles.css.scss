@@ -130,6 +130,13 @@
         .tag3 a { color: lighten($primary_fg_colour, 60%); }
       }
     }
+
+    .article-tags {
+      ul {
+        background: url(/assets/misc/circular_tag.png) center left no-repeat;
+        padding-left: 20px;
+      }
+    }
   }
 
   .article-content {
@@ -220,6 +227,8 @@ table.highlighttable {
   margin: 10px 40px;
   padding: 6px 20px;
   border-left: 5px solid #aaa;
+
+  background: url(/assets/misc/chalkwork_quote.png) top right no-repeat;
 
   p {
     margin: 0px;

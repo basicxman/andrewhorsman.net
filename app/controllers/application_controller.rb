@@ -60,6 +60,13 @@ class ApplicationController < ActionController::Base
   end
   helper_method :render_sidebar_widget
 
+  def render_sidebar_widgets(*widgets)
+    widgets.inject("") { |s, widget|
+      s << render_sidebar_widget(widget)
+    }.html_safe
+  end
+  helper_method :render_sidebar_widgets
+
   def reading_list
     set(:reading_items, ReadingItem.updated_desc.all)
     { :reading_items => @reading_items }

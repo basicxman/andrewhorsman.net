@@ -1,12 +1,14 @@
 <div class="reading-items-container">
-  <ul>
-    <% @reading_items.each do |item| %>
-      <div class="reading-item">
-        <%= link_to item.name, item.link, :title => item.name, :target => "_blank" %>
-      </div>
-      <div class="reading-item-rating">
-        <%= item.rating %>
-      </div>
-    <% end %>
-  </ul>
+  <% if @reading_items.length > 0 %>
+    <ul>
+      <% @reading_items.each do |item| %>
+        <div class="reading-item">
+          <%= link_to item.name, item.link, :title => item.name, :target => "_blank" %>
+        </div>
+        <div class="reading-item-rating">
+          <%= item.rating %>
+        </div>
+      <% end %>
+    </ul>
+  <% end %>
 </div>

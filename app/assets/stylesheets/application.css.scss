@@ -92,6 +92,7 @@ html, body {
 }
 
 /* Content/Container */
+$sidebar_offset: 18px;
 #container {
   position: relative;
   width: $width;
@@ -104,7 +105,8 @@ html, body {
 
   #sidebar {
     float: right;
-    width: $width - $content_width;
+    width: $width - $content_width - $sidebar_offset;
+    margin-left: $sidebar_offset;
   }
 }
 
@@ -161,5 +163,13 @@ $tooltip_rad: 5px;
 
   .google-plus {
     padding-top: 1px;
+  }
+}
+
+/* Sidebar Widgets */
+.contact-me-widget a {
+  color: $primary_fg_colour;
+  &:hover {
+    color: lighten($primary_fg_colour, 30%);
   }
 }
