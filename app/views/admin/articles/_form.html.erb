@@ -1,22 +1,24 @@
-<%= form_for [:admin, @article] do |f| %>
-  <%= f.label :title %><br />
-  <%= f.text_field :title %><%= error_for(:title, @article) %><br />
-  
-  <%= f.label :author %><br />
-  <%= f.text_field :author %><%= error_for(:author, @article) %><br />
+<div class="article-admin-form">
+  <%= form_for [:admin, @article] do |f| %>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %><%= error_for(:title, @article) %><br />
 
-  <%= f.label :tag_list, "Tags" %><br />
-  <%= f.text_field :tag_list %><br />
+    <%= f.label :author %><br />
+    <%= f.text_field :author %><%= error_for(:author, @article) %><br />
 
-  <%= f.label :content %><br />
-  <%= error_for(:content, @article, "<br />") %>
-  <%= f.text_area :content %><br />
+    <%= f.label :tag_list, "Tags" %><br />
+    <%= f.text_field :tag_list %><br />
 
-  <br />
-  <%= f.label :file, "Alternatively you may upload a file." %><br />
-  <%= f.file_field :file %>
-  <br />
+    <%= f.label :content %><br />
+    <%= error_for(:content, @article, "<br />") %>
+    <%= f.text_area :content %><br />
 
-  <br />
-  <%= f.submit %>
-<% end %>
+    <br />
+    <%= f.label :file, "Alternatively you may upload a file." %><br />
+    <%= f.file_field :file %>
+    <br />
+
+    <br />
+    <%= f.submit %>
+  <% end %>
+</div>
