@@ -41,8 +41,8 @@ class ArticlesControllerTest < ActionController::TestCase
     2.times { overflow_with_articles }
     get :multiple, :page => 1
     assert_select ".article-title", :count => get_config(:articles_in_page)
-    assert_select "a", :text => "Next Page", :href => "/articles/page/2"
-    assert_select "a", :text => "Previous Page", :href => "/articles/page/0"
+    assert_select "a", :text => "Next Page &raquo;", :href => "/articles/page/2"
+    assert_select "a", :text => "&laquo; Previous Page", :href => "/articles/page/0"
   end
 
   test "should display an article" do

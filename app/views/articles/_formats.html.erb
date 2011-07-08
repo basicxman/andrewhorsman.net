@@ -1,0 +1,6 @@
+<div class="article-formats">
+  <%= link_to "html", article_path(@article), :title => "HTML Permalink" %> |
+  <%= link_to "txt",  article_path(@article, :format => :txt),  :title => "Plain text/Markdown" %> |
+  <%= link_to "json", article_path(@article, :format => :json), :title => "JSON" %> |
+  <%= link_to "xml",  article_path(@article, :format => :xml),  :title => "XML" %>
+</div>

@@ -3,13 +3,13 @@
 <div class="previous-next">
   <% unless prev_article.nil? %>
     <span class="prev-article-link">
-      <%= link_to "Prev", article_path(prev_article), :title => "Prev" %>
+      <%= link_to "&laquo;&nbsp;&nbsp;".html_safe, article_path(prev_article), :title => "Previous Article (#{@article.title})" %>
     </span>
   <% end %>
 
   <% unless next_article.nil? %>
     <span class="next-article-link">
-      <%= link_to "Next", article_path(next_article), :title => "Next" %>
+      <%= link_to "&nbsp;&nbsp;&raquo;".html_safe, article_path(next_article), :title => "Next Article (#{@article.title})" %>
     </span>
   <% end %>
 </div>

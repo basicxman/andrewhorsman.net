@@ -30,4 +30,5 @@
   <div class="article-content"><%= @article.content_html.html_safe %></div>
 
   <%= render "social" %>
+  <%= render "formats", :locals => { :article => @article } %>
 </div>

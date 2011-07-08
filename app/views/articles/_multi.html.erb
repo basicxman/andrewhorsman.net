@@ -11,4 +11,7 @@
   <% end %>
 </div>
 <br />
-<%= render "articles/previous_next_pages", :locals => { :page => @page, :available_pages => @available_pages, :query => @query } %> <%= render "articles/top" %>
+<div class="page-nav-links">
+  <%= render "articles/previous_next_pages", :locals => { :page => @page, :available_pages => @available_pages, :query => @query } %>
+  <br /><%= render "articles/top" %>
+</div>
