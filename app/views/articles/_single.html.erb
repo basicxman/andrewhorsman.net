@@ -15,7 +15,7 @@
     <% if display_updated %>
       <div class="article-updated-date">Updated:&nbsp;&nbsp;<span class="date"><%= @article.updated_at %></span></div>
     <% end %>
-    <% if @article.tags.length > 0 %>
+    <% if @article.tags.any? %>
       <div class="article-tags">
         <ul>
           <% @article.tags.each do |tag| %>

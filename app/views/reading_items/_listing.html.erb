@@ -1,5 +1,5 @@
 <div class="reading-items-container">
-  <% if @reading_items.length > 0 %>
+  <% if @reading_items.any? %>
     <ul>
       <% @reading_items.each do |item| %>
         <div class="reading-item">

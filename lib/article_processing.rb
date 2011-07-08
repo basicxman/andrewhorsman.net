@@ -85,7 +85,7 @@ class ComplexProcessor
     code[0...6] = '' if code[0...6] == '<code>'
     code[-7, 7] = '' if code[-7, 7] == '</code>'
     code.split("\n").each_with_index do |line, index|
-      line_numbers << index + 1 if line =~ /\*{3}(\r?\n|$)/
+      line_numbers << index + 1 if line.end_with? "***"
     end
 
     { :code => code.gsub(/\s*\*{3}(\r?\n|$)/, "\n"), :lines => line_numbers.join(" ") }

@@ -28,11 +28,7 @@ module ApplicationHelper
   def snip_content(content)
     c = content.gsub(/\<div class="syntax"\>.*?\<\/table\>\<\/div\>/m, "") # Remove large syntax highlighted regions.
     l = get_config(:short_content_length)
-    return c if c.length <= l
-
-    i = l + c[l..-1].index(/[!\?\.;,\s%]|$/)
-    i = l if i.nil? or i - 15 > l
-    c[0...i] + "..."
+    c.truncate(l, :separator => ' ')
   end
 
   # Social buttons.

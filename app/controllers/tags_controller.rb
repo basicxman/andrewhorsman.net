@@ -15,7 +15,7 @@ class TagsController < ApplicationController
     tags = params[:keywords].split(",")
 
     set(:noun, tags.length == 1 ? "tag" : "tags")
-    set(:tagline, generate_tagline(tags))
+    set(:tagline, tags.to_sentence(:last_word_connector => " and "))
 
     expose(:articles, Article.find_by_tags(tags))
   end
