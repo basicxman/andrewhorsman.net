@@ -2,6 +2,11 @@
 
 #admin-container {
   width: 100%;
+
+  #notice {
+    display: none;
+  }
+
   #container {
     width: 100%;
     #content {
@@ -43,5 +48,14 @@
     #sidebar {
       display: none;
     }
+  }
+}
+
+#notices-box {
+  margin-top: 10px;
+  width: 400px;
+
+  span {
+    color: #39f;
   }
 }

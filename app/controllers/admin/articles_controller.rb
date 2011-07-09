@@ -30,26 +30,31 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def destroy
+    set(:id, params[:id].to_i)
     Article.find_by_params(params).destroy
-    redirect_to admin_path
+    redirect_or_js :redirect_path => admin_path
   end
 
   def commit
-    notice = commit_notice(Article.find_by_params(params).commit)
-    redirect_to admin_path, :notice => notice
+    operation_action(:commit, :commit_notice)
   end
 
   def publish
-    notice = publish_notice(Article.find_by_params(params).publish)
-    redirect_to admin_path, :notice => notice
+    operation_action(:publish, :publish_notice)
   end
 
   def unpublish
-    Article.find_by_params(params).unpublish
-    redirect_to admin_path, :notice => "Unpublished."
+    operation_action(:unpublish)
   end
 
   private
+
+  def operation_action(model_method, notice_method = nil)
+    set(:article, Article.find_by_params(params))
+    result = @article.send(model_method)
+    flash.now[:notice] = send(notice_method, result) unless notice_method.nil?
+    redirect_or_js :redirect_path => admin_path, :js => "operation"
+  end
 
   def get_article_params
     if params[:article][:file]

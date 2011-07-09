@@ -1,21 +1,31 @@
-$(function() {
-  if ($(".article-admin-form")) {
-    stopFormBrowserDefault("dragover");
-    stopFormBrowserDefault("dragenter");
-    $(".article-admin-form").get(0).addEventListener("drop", function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-
-      var file = e.dataTransfer.files[0];
-      var reader = new FileReader();
-      reader.onprogress = function(e) { };
-      reader.onload = function(e) {
-        fillForm(e.target.result);
-      };
-      reader.readAsText(file);
-    }, false);
+$.fn.extend({
+  parentRow: function() {
+    return $(this).parent("td").parent("tr");
   }
 });
+
+$(function() {
+  stopFormBrowserDefault("dragover");
+  stopFormBrowserDefault("dragenter");
+  if ($(".article-admin-form").length) {
+    addDropCapability($(".article-admin-form"));
+  }
+});
+
+function addDropCapability(elm) {
+  $(elm).get(0).addEventListener("drop", function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    var file = e.dataTransfer.files[0];
+    var reader = new FileReader();
+    reader.onprogress = function(e) { };
+    reader.onload = function(e) {
+      fillForm(e.target.result);
+    };
+    reader.readAsText(file);
+  }, false);
+}
 
 function stopFormBrowserDefault(event) {
   $(".article-admin-form").bind(event, function(e) { e.preventDefault(); });

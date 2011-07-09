@@ -20,18 +20,18 @@
         @article_cur = article
         @tags        = article.tags
       %>
-      <tr>
-        <td><%= article.id %></td>
-        <td><%= article.title %></td>
-        <td><%= render "tags/single_line_tags", :locals => { :tags => @tags } %></td>
-        <td><%= article.author %></td>
-        <td><%= article.stage %></td>
-        <td><%= article.published_at.nil?? time_required(article.last_commit_date) : "N/A" %></td>
-        <td><%= link_to "E", edit_admin_article_path(article), :title => "Edit/Show #{article.title}" %></td>
-        <td><%= link_to image_tag(asset_path("misc/circular_delete.png"), :alt => "Delete Article"), admin_article_path(article), :method => :delete, :title => "Delete #{article.title}", :confirm => "Are you sure?" %></td>
-        <td><%= render "admin/articles/commit_publish", :locals => { :article_cur => @article_cur } %></td>
-        <td><%= link_to "Data", admin_article_path(article, :format => :txt), :title => "Data", :target => "_blank" %></td>
-        <td><%= link_to "Show", preview(article), :title => "Show/Preview", :target => "_blank" %></td>
+      <tr id="<%= dom_id(article) %>">
+        <td class="article-id"><%= article.id %></td>
+        <td class="article-title"><%= article.title %></td>
+        <td class="article-tags-list"><%= render "tags/single_line_tags", :locals => { :tags => @tags } %></td>
+        <td class="article-author"><%= article.author %></td>
+        <td class="article-stage"><%= article.stage %></td>
+        <td class="article-tic"><%= time_to_commit(article) %></td>
+        <td class="article-edit"><%= link_to "E", edit_admin_article_path(article), :title => "Edit/Show #{article.title}" %></td>
+        <td class="article-delete"><%= link_to image_tag(asset_path("misc/circular_delete.png"), :alt => "Delete Article"), admin_article_path(article), :method => :delete, :remote => true, :class => "article_delete", :title => "Delete #{article.title}", :confirm => "Are you sure?" %></td>
+        <td class="article-op"><%= render "admin/articles/commit_publish", :locals => { :article_cur => @article_cur } %></td>
+        <td class="article-data"><%= link_to "Data", admin_article_path(article, :format => :txt), :title => "Data", :target => "_blank" %></td>
+        <td class="article-show"><%= link_to "Show", preview(article), :title => "Show/Preview", :target => "_blank" %></td>
       </tr>
     <% end %>
   </tbody>

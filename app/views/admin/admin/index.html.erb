@@ -5,6 +5,11 @@
   <%= link_to "New Reading Item", new_admin_reading_item_path, :title => "New Reading Item" %>
   <%= link_to "Logout", logout_path, :title => "Logout" %>
   <br />
+  <fieldset id="notices-box">
+    <legend>Notices</legend>
+    <span id="article-notice"><%= params[:notice] %></span>
+  </fieldset>
+  <br />
   <br />
 </div>
 <div id="full-content">

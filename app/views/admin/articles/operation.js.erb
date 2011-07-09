@@ -1,0 +1,5 @@
+<% @article_cur = @article %>
+$('#<%= dom_id(@article) %>').children('.article-stage').text('<%= @article.stage %>');
+$('#<%= dom_id(@article) %>').children('.article-op').html('<%= escape_javascript render(:partial => 'commit_publish', :locals => { :article_cur => @article_cur }) %>');
+$('#<%= dom_id(@article) %>').children('.article-tic').text('<%= time_to_commit(@article) %>');
+$('#article-notice').html('<%= escape_javascript flash[:notice] %>');

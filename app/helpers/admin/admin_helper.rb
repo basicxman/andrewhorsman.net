@@ -1,5 +1,12 @@
 module Admin::AdminHelper
 
+  # Time to Commit string.
+  def time_to_commit(article)
+    return "Go" if article.stage == get_config(:required_milestone_commits) and article.published_at.nil?
+    return "N/A" unless article.published_at.nil?
+    time_required(article.last_commit_date)
+  end
+
   # Calculate amount of time until a commit can be made.
   def time_required(time)
     return "Go" if time.nil?

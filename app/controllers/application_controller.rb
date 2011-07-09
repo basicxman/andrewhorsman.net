@@ -22,6 +22,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Convenience method for JS formats.
+  def redirect_or_js(opts)
+    respond_to do |format|
+      format.html { redirect_to opts[:redirect_path] }
+      format.js   { render opts[:js] }
+    end
+  end
+
   # User authentication
   def user
     @user ||= User.find(session[:user_id]) if session[:user_id]
