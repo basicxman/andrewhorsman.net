@@ -26,7 +26,7 @@
         <td><%= render "tags/single_line_tags", :locals => { :tags => @tags } %></td>
         <td><%= article.author %></td>
         <td><%= article.stage %></td>
-        <td><%= time_required(article.last_commit_date) %></td>
+        <td><%= article.published_at.nil?? time_required(article.last_commit_date) : "N/A" %></td>
         <td><%= link_to "E", edit_admin_article_path(article), :title => "Edit/Show #{article.title}" %></td>
         <td><%= link_to image_tag(asset_path("misc/circular_delete.png"), :alt => "Delete Article"), admin_article_path(article), :method => :delete, :title => "Delete #{article.title}", :confirm => "Are you sure?" %></td>
         <td><%= render "admin/articles/commit_publish", :locals => { :article_cur => @article_cur } %></td>
