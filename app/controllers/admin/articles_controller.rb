@@ -44,7 +44,7 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def unpublish
-    operation_action(:unpublish)
+    operation_action(:unpublish, "Unpublished.")
   end
 
   private
@@ -52,7 +52,13 @@ class Admin::ArticlesController < ApplicationController
   def operation_action(model_method, notice_method = nil)
     set(:article, Article.find_by_params(params))
     result = @article.send(model_method)
-    flash.now[:notice] = send(notice_method, result) unless notice_method.nil?
+
+    if notice_method.is_a? String
+      flash.now[:notice] = notice_method
+    elsif notice_method.is_a? Symbol
+      flash.now[:notice] = send(notice_method, result)
+    end
+
     redirect_or_js :redirect_path => admin_path, :js => "operation"
   end
 
