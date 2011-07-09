@@ -33,14 +33,7 @@ class << ArticleProcessing
     doc.highlight!
     doc.tooltips!
 
-    content = doc.content
-    content = indentation(content)
-  end
-
-  # HTML renders multiple spaces not within a <pre> tag as a single space,
-  # add literal "&nbsp;"s with a .tab span warpper.
-  def indentation(content)
-    content.gsub("  ", "<span class='tab'>&nbsp;&nbsp;</span>")
+    doc.content
   end
 end
 
